@@ -49,14 +49,14 @@ export function HeroStage() {
     <aside
       ref={stage}
       aria-label="Featured work previews"
-      className="relative hidden min-h-[22rem] lg:block xl:min-h-[26rem]"
+      className="relative hidden min-h-88 lg:block xl:min-h-104"
     >
       <div
         aria-hidden
         className="absolute inset-0 rounded-2xl border border-line bg-[linear-gradient(var(--line)_1px,transparent_1px),linear-gradient(90deg,var(--line)_1px,transparent_1px)] bg-[size:24px_24px] [mask-image:radial-gradient(ellipse_at_center,black,transparent_72%)]"
       />
 
-      <div className="absolute left-0 top-6 max-w-[11rem] rounded-xl border border-line bg-surface/90 p-4 font-mono text-[11px] leading-5 backdrop-blur-md">
+      <div className="absolute left-0 top-6 max-w-44 rounded-xl border border-line bg-surface/90 p-4 font-mono text-[11px] leading-5 backdrop-blur-md">
         <p className="text-muted">
           <span className="text-accent">$</span> whoami
         </p>
@@ -71,7 +71,7 @@ export function HeroStage() {
         <p className="truncate">{site.stack}</p>
       </div>
 
-      <div className="relative ml-auto h-[20rem] w-[min(100%,20rem)] xl:h-[22rem] xl:w-[22rem]">
+      <div className="relative ml-auto h-80 w-[min(100%,20rem)] xl:h-88 xl:w-88">
         {stack.map((work, i) => (
           <Link
             key={work.slug}
