@@ -31,7 +31,7 @@ export function WorkDetail({ work }: { work: Work }) {
     <article ref={hero}>
       <div className="border-b border-line">
         <div
-          className="mx-auto max-w-[90rem] px-5 py-16 sm:px-10 sm:py-24"
+          className="mx-auto max-w-360 px-5 py-16 sm:px-10 sm:py-24"
           style={{
             background: `radial-gradient(70% 50% at 0% 0%, hsl(${work.hue} 65% 45% / 0.2), transparent 60%)`,
           }}
@@ -64,7 +64,7 @@ export function WorkDetail({ work }: { work: Work }) {
         </div>
       </div>
 
-      <div className="mx-auto grid max-w-[90rem] gap-16 px-5 py-16 sm:px-10 lg:grid-cols-[1fr_22rem] lg:gap-20 lg:py-24">
+      <div className="mx-auto grid max-w-360 gap-16 px-5 py-16 sm:px-10 lg:grid-cols-[1fr_22rem] lg:gap-20 lg:py-24">
         <div className="space-y-12">
           <section>
             <h2 className="font-mono text-xs uppercase tracking-widest text-muted">Overview</h2>
@@ -133,7 +133,7 @@ export function WorkDetail({ work }: { work: Work }) {
 
       {related.length > 0 && (
         <div className="border-t border-line bg-surface/30 py-16">
-          <div className="mx-auto max-w-[90rem] px-5 sm:px-10">
+          <div className="mx-auto max-w-360 px-5 sm:px-10">
             <h2 className="font-mono text-xs uppercase tracking-widest text-muted">Related</h2>
             <ul className="mt-6 grid gap-4 sm:grid-cols-2">
               {related.map((r) => (
