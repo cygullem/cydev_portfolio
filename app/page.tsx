@@ -1,6 +1,6 @@
 import { site } from "@/lib/content";
-import { Hero } from "@/components/hero/hero";
-import { Projects } from "@/components/projects/projects";
+import { HeroScene } from "@/components/hero/hero-scene";
+import { FeaturedWorks } from "@/components/home/featured-works";
 import { About } from "@/components/about/about";
 import { Experience } from "@/components/experience/experience";
 import { Contact } from "@/components/contact/contact";
@@ -22,8 +22,8 @@ export default function Home() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c") }}
       />
-      <Hero />
-      <Projects />
+      <HeroScene />
+      <FeaturedWorks />
       <About />
       <Experience />
       <Contact />

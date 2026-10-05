@@ -11,7 +11,10 @@ export function Experience() {
             <p className="font-mono text-sm text-muted">{e.period}</p>
             <div>
               <h3 className="text-xl font-semibold tracking-tight">{e.role}</h3>
-              <p className="text-muted">{e.company}</p>
+              <p className="text-muted">
+                {e.company}
+                {"location" in e && e.location ? ` · ${e.location}` : ""}
+              </p>
               <ul className="mt-5 space-y-2 leading-relaxed">
                 {e.achievements.map((a, i) => (
                   <li key={i} className="flex gap-3">

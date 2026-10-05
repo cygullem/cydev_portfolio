@@ -15,11 +15,11 @@ export function Section({
 }) {
   return (
     <section id={id} aria-labelledby={`${id}-title`} className="border-t border-line py-24 sm:py-32">
-      <div className="mx-auto max-w-6xl px-5 sm:px-8">
-        <p className="font-mono text-xs uppercase tracking-widest text-muted">
+      <div className="mx-auto max-w-[90rem] px-5 sm:px-10">
+        <p className="font-mono text-xs uppercase tracking-[0.25em] text-accent">
           {index} / {label}
         </p>
-        <h2 id={`${id}-title`} className="mt-4 max-w-2xl text-3xl font-semibold tracking-tight text-balance sm:text-4xl">
+        <h2 id={`${id}-title`} className="font-display mt-4 max-w-3xl text-4xl font-semibold tracking-tight text-balance sm:text-5xl">
           {title}
         </h2>
         <div className="mt-14">{children}</div>
