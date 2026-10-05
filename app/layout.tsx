@@ -1,9 +1,9 @@
 import type { Metadata, Viewport } from "next";
-import { Archivo, Geist_Mono, Space_Grotesk } from "next/font/google";
+import { Archivo, Bebas_Neue, Geist_Mono, Space_Grotesk } from "next/font/google";
 import { site } from "@/lib/content";
-import { Nav } from "@/components/navigation/nav";
-import { Footer } from "@/components/footer/footer";
+import { SiteChrome } from "@/components/layout/site-chrome";
 import "./globals.css";
+import Link from "next/link";
 
 const space = Space_Grotesk({
   variable: "--font-space",
@@ -12,6 +12,12 @@ const space = Space_Grotesk({
 
 const archivo = Archivo({
   variable: "--font-archivo",
+  subsets: ["latin"],
+});
+
+const bebas = Bebas_Neue({
+  weight: "400",
+  variable: "--font-bebas",
   subsets: ["latin"],
 });
 
@@ -32,37 +38,30 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#f8f7f4" },
-    { media: "(prefers-color-scheme: dark)", color: "#0a0e14" },
-  ],
+  themeColor: "#ef6534",
 };
 
-const themeScript = `try{var t=localStorage.getItem("theme"),d=t==="dark"||(t!=="light"&&matchMedia("(prefers-color-scheme: dark)").matches),e=document.documentElement;e.classList.toggle("dark",d);e.style.colorScheme=d?"dark":"light"}catch(_){}`;
+const lightOnlyScript = `try{var e=document.documentElement;e.classList.remove("dark");e.style.colorScheme="light";localStorage.setItem("theme","light")}catch(_){}`;
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
       suppressHydrationWarning
-      className={`${space.variable} ${archivo.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${space.variable} ${archivo.variable} ${bebas.variable} ${geistMono.variable} h-full antialiased`}
     >
       <head>
-        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+        <script dangerouslySetInnerHTML={{ __html: lightOnlyScript }} />
       </head>
       <body className="min-h-full flex flex-col font-sans">
         <div id="top" />
-        <a
+        <Link
           href="#main"
-          className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[60] focus:rounded-md focus:bg-foreground focus:px-4 focus:py-2 focus:text-background"
+          className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-60 focus:rounded-md focus:bg-foreground focus:px-4 focus:py-2 focus:text-white"
         >
           Skip to content
-        </a>
-        <Nav />
-        <main id="main" className="flex-1">
-          {children}
-        </main>
-        <Footer />
+        </Link>
+        <SiteChrome>{children}</SiteChrome>
       </body>
     </html>
   );
