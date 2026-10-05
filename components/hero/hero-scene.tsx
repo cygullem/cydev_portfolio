@@ -52,13 +52,13 @@ export function HeroScene() {
   const marqueeItems = [...works.map((w) => w.name), ...works.map((w) => w.name)];
 
   return (
-    <section ref={root} aria-labelledby="hero-title" className="relative -mt-[4.5rem] overflow-hidden pt-[4.5rem]">
+    <section ref={root} aria-labelledby="hero-title" className="relative -mt-18 overflow-hidden pt-18">
       <div
         data-hero-glow
         aria-hidden
-        className="pointer-events-none absolute -left-1/4 top-0 -z-10 h-[32rem] w-[70%] rounded-full bg-[radial-gradient(circle,var(--glow),transparent_65%)] blur-3xl"
+        className="pointer-events-none absolute -left-1/4 top-0 -z-10 h-128 w-[70%] rounded-full bg-[radial-gradient(circle,var(--glow),transparent_65%)] blur-3xl"
       />
-      <div className="mx-auto grid min-h-[calc(100svh-4.5rem)] max-w-[90rem] grid-rows-[1fr_auto] gap-12 px-5 pb-10 pt-12 sm:px-10 sm:pt-16 lg:pt-20">
+      <div className="mx-auto grid min-h-[calc(100svh-4.5rem)] max-w-360 grid-rows-[1fr_auto] gap-12 px-5 pb-10 pt-12 sm:px-10 sm:pt-16 lg:pt-20">
         <div className="grid items-end gap-10 lg:grid-cols-[1fr_minmax(0,26rem)] xl:grid-cols-[1fr_28rem] xl:gap-14">
         <div className="flex flex-col justify-end">
           <p data-hero-fade className="mb-8 inline-flex w-fit items-center gap-2 border border-line bg-surface/80 px-3 py-1.5 font-mono text-[11px] uppercase tracking-widest text-muted backdrop-blur-sm">
