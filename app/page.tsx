@@ -1,9 +1,9 @@
 import { site } from "@/lib/content";
-import { HeroScene } from "@/components/hero/hero-scene";
-import { FeaturedWorks } from "@/components/home/featured-works";
+import { PortfolioHero } from "@/components/home/portfolio-hero";
 import { About } from "@/components/about/about";
 import { Experience } from "@/components/experience/experience";
 import { Contact } from "@/components/contact/contact";
+import { Footer } from "@/components/footer/footer";
 
 const jsonLd = {
   "@context": "https://schema.org",
@@ -22,11 +22,13 @@ export default function Home() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c") }}
       />
-      <HeroScene />
-      <FeaturedWorks />
-      <About />
-      <Experience />
-      <Contact />
+      <PortfolioHero />
+      <div className="bg-background">
+        <About />
+        <Experience />
+        <Contact />
+        <Footer />
+      </div>
     </>
   );
 }
