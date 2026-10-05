@@ -7,7 +7,7 @@ export function Experience() {
       <ol className="relative border-l border-line">
         {experience.map((e) => (
           <li key={`${e.company}-${e.period}`} className="relative grid gap-4 pb-16 pl-8 last:pb-0 md:grid-cols-[12rem_1fr] md:gap-12">
-            <span aria-hidden className="absolute top-1.5 -left-[5px] size-2.5 rounded-full border-2 border-background bg-accent" />
+            <span aria-hidden className="absolute top-1.5 -left-1.25 size-2.5 rounded-full border-2 border-background bg-accent" />
             <p className="font-mono text-sm text-muted">{e.period}</p>
             <div>
               <h3 className="text-xl font-semibold tracking-tight">{e.role}</h3>
