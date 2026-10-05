@@ -8,10 +8,23 @@ export const contentType = "image/png";
 export default function OpengraphImage() {
   return new ImageResponse(
     (
-      <div style={{ display: "flex", flexDirection: "column", justifyContent: "space-between", width: "100%", height: "100%", padding: 80, background: "#0a0e14", color: "#f1f5f9" }}>
-        <div style={{ fontSize: 28, color: "#9a9aa5" }}>{`${site.name} · ${site.role}`}</div>
-        <div style={{ fontSize: 84, fontWeight: 600, letterSpacing: -3, lineHeight: 1.05, maxWidth: 960 }}>{site.headline}</div>
-        <div style={{ width: 96, height: 6, background: "#4ade80", borderRadius: 3 }} />
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "space-between",
+          width: "100%",
+          height: "100%",
+          padding: 80,
+          background: "#ef6534",
+          color: "#ffffff",
+        }}
+      >
+        <div style={{ fontSize: 28, opacity: 0.85 }}>{`${site.brand} · ${site.role}`}</div>
+        <div style={{ fontSize: 72, fontWeight: 700, letterSpacing: -2, lineHeight: 1.05, maxWidth: 960 }}>
+          {site.firstName.toUpperCase()}
+        </div>
+        <div style={{ width: 96, height: 6, background: "#ffffff", borderRadius: 3 }} />
       </div>
     ),
     size,
