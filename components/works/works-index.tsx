@@ -39,7 +39,7 @@ export function WorksIndex() {
   }, [filter, reduce]);
 
   return (
-    <div className="mx-auto max-w-[90rem] px-5 pb-24 pt-12 sm:px-10 sm:pt-16">
+    <div className="mx-auto max-w-360 px-5 pb-24 pt-12 sm:px-10 sm:pt-16">
       <header className="max-w-3xl">
         <p className="font-mono text-xs uppercase tracking-[0.25em] text-accent">Archive</p>
         <h1 className="font-display mt-4 text-5xl font-semibold tracking-tight sm:text-7xl">Works</h1>
