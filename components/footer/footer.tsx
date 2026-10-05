@@ -4,7 +4,7 @@ import { site } from "@/lib/content";
 export function Footer() {
   return (
     <footer className="border-t border-line">
-      <div className="mx-auto flex max-w-[90rem] flex-col gap-6 px-5 py-12 text-sm text-muted sm:flex-row sm:items-center sm:justify-between sm:px-10">
+      <div className="mx-auto flex max-w-360 flex-col gap-6 px-5 py-12 text-sm text-muted sm:flex-row sm:items-center sm:justify-between sm:px-10">
         <p>
           © {new Date().getFullYear()} {site.name}
           <span className="mx-2 text-line">·</span>
