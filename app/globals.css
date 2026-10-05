@@ -1,27 +1,14 @@
 @import "tailwindcss";
 
-@custom-variant dark (&:where(.dark, .dark *));
-
 :root {
-  --background: #f8f7f4;
-  --foreground: #0f172a;
-  --muted: #64748b;
-  --line: #e2e8f0;
+  --background: #faf8f5;
+  --foreground: #1c1917;
+  --muted: #78716c;
+  --line: #e7e5e4;
   --surface: #ffffff;
-  --accent: #16a34a;
-  --accent-dim: color-mix(in oklab, var(--accent) 18%, transparent);
-  --glow: color-mix(in oklab, var(--accent) 35%, transparent);
-}
-
-.dark {
-  --background: #0a0e14;
-  --foreground: #f1f5f9;
-  --muted: #94a3b8;
-  --line: #1e293b;
-  --surface: #111827;
-  --accent: #4ade80;
-  --accent-dim: color-mix(in oklab, var(--accent) 12%, transparent);
-  --glow: color-mix(in oklab, var(--accent) 22%, transparent);
+  --accent: #c2410c;
+  --hero-orange: #ef6534;
+  --hero-orange-deep: #d94e1f;
 }
 
 @theme inline {
@@ -31,13 +18,17 @@
   --color-line: var(--line);
   --color-surface: var(--surface);
   --color-accent: var(--accent);
+  --color-hero-orange: var(--hero-orange);
+  --color-hero-orange-deep: var(--hero-orange-deep);
   --font-sans: var(--font-space);
   --font-mono: var(--font-geist-mono);
   --font-display: var(--font-archivo);
+  --font-hero: var(--font-bebas);
 }
 
 html {
-  scroll-padding-top: 5.5rem;
+  scroll-padding-top: 5rem;
+  color-scheme: light;
 }
 
 body {
@@ -45,26 +36,12 @@ body {
   color: var(--foreground);
 }
 
-body::before {
-  content: "";
-  pointer-events: none;
-  position: fixed;
-  inset: 0;
-  z-index: 50;
-  opacity: 0.035;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-}
-
-.dark body::before {
-  opacity: 0.06;
-}
-
 ::selection {
-  background: var(--accent-dim);
+  background: color-mix(in oklab, var(--hero-orange) 25%, white);
 }
 
 :focus-visible {
-  outline: 2px solid var(--accent);
+  outline: 2px solid var(--hero-orange);
   outline-offset: 3px;
 }
 
@@ -72,27 +49,12 @@ body::before {
   font-family: var(--font-display), var(--font-sans), system-ui, sans-serif;
 }
 
+.font-hero {
+  font-family: var(--font-hero), var(--font-display), sans-serif;
+}
+
 @media (prefers-reduced-motion: no-preference) {
   html {
     scroll-behavior: smooth;
-  }
-}
-
-.marquee-track {
-  animation: marquee 40s linear infinite;
-}
-
-@keyframes marquee {
-  from {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(-50%);
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .marquee-track {
-    animation: none;
   }
 }
