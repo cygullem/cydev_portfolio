@@ -6,8 +6,6 @@ import { useEffect, useState } from "react";
 import { AnimatePresence, LazyMotion, domAnimation, m } from "motion/react";
 import { site } from "@/lib/content";
 import { Close, GitHub, LinkedIn, Menu } from "@/components/icons";
-import { ThemeToggle } from "./theme-toggle";
-
 const homeAnchors = [
   { href: "/works", label: "Work", match: "/works" },
   { href: "/#about", label: "About", id: "about" },
@@ -17,27 +15,7 @@ const homeAnchors = [
 
 export function Nav() {
   const pathname = usePathname();
-  const onHome = pathname === "/";
-  const [scrolled, setScrolled] = useState(false);
-  const [active, setActive] = useState("");
   const [open, setOpen] = useState(false);
-  const compact = !onHome || scrolled || open;
-
-  useEffect(() => {
-    if (!onHome) return;
-    const top = new IntersectionObserver(([e]) => setScrolled(!e.isIntersecting));
-    const sentinel = document.getElementById("top");
-    if (sentinel) top.observe(sentinel);
-    const spy = new IntersectionObserver(
-      (entries) => entries.forEach((e) => e.isIntersecting && setActive(e.target.id)),
-      { rootMargin: "-45% 0px -50% 0px" },
-    );
-    document.querySelectorAll("main section[id]").forEach((s) => spy.observe(s));
-    return () => {
-      top.disconnect();
-      spy.disconnect();
-    };
-  }, [onHome, pathname]);
 
   useEffect(() => {
     if (!open) return;
@@ -51,15 +29,11 @@ export function Nav() {
 
   return (
     <header
-      className={`sticky top-0 z-[60] border-b backdrop-blur-xl transition-[background-color,border-color] duration-300 ${
-        compact ? "border-line bg-background/85" : "border-transparent bg-background/50"
-      }`}
+      className="sticky top-0 z-60 border-b border-line bg-background/90 backdrop-blur-xl"
     >
       <nav
         aria-label="Primary"
-        className={`mx-auto flex max-w-[90rem] items-center justify-between px-5 transition-[height] duration-300 sm:px-10 ${
-          compact ? "h-14" : "h-[4.5rem]"
-        }`}
+        className="mx-auto flex h-14 max-w-360 items-center justify-between px-5 sm:px-10"
       >
         <Link href="/" className="font-display text-sm font-semibold tracking-tight sm:text-base">
           <span className="text-muted">{site.initials}</span>
@@ -69,16 +43,13 @@ export function Nav() {
 
         <ul className="hidden items-center gap-0.5 md:flex">
           {homeAnchors.map((l) => {
-            const current =
-              l.match === pathname ||
-              (onHome && l.id && active === l.id) ||
-              (l.match === "/works" && pathname.startsWith("/works"));
+            const current = l.match === pathname || (l.match === "/works" && pathname.startsWith("/works"));
             return (
               <li key={l.label}>
                 {l.href.startsWith("/#") ? (
-                  <a href={l.href} aria-current={current ? "true" : undefined} className={linkClass}>
+                  <Link href={l.href} aria-current={current ? "true" : undefined} className={linkClass}>
                     {l.label}
-                  </a>
+                  </Link>
                 ) : (
                   <Link href={l.href} aria-current={current ? "true" : undefined} className={linkClass}>
                     {l.label}
@@ -108,7 +79,6 @@ export function Nav() {
           >
             <LinkedIn />
           </a>
-          <ThemeToggle />
           <button
             type="button"
             onClick={() => setOpen((o) => !o)}
@@ -133,7 +103,7 @@ export function Nav() {
               transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
               className="overflow-hidden border-t border-line md:hidden"
             >
-              <ul className="mx-auto flex max-w-[90rem] flex-col px-5 py-4">
+              <ul className="mx-auto flex max-w-360 flex-col px-5 py-4">
                 {homeAnchors.map((l) => (
                   <li key={l.label}>
                     {l.href.startsWith("/#") ? (
