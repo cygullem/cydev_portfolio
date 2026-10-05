@@ -30,7 +30,7 @@ export function FeaturedWorks() {
 
   return (
     <section id="work" aria-labelledby="featured-work-title" className="border-t border-line py-24 sm:py-32">
-      <div className="mx-auto max-w-[90rem] px-5 sm:px-10">
+      <div className="mx-auto max-w-360 px-5 sm:px-10">
         <div className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
           <div>
             <p className="font-mono text-xs uppercase tracking-[0.25em] text-accent">Selected</p>
@@ -58,7 +58,7 @@ export function FeaturedWorks() {
                 i === 0 ? "lg:col-span-7 lg:row-span-2" : "lg:col-span-5"
               }`}
             >
-              <Link href={`/works/${work.slug}`} className="flex h-full min-h-[280px] cursor-pointer flex-col p-6 sm:p-8">
+              <Link href={`/works/${work.slug}`} className="flex h-full min-h-112 cursor-pointer flex-col p-6 sm:p-8">
                 <div
                   aria-hidden
                   className="absolute inset-0 opacity-40 transition-opacity group-hover:opacity-60"
