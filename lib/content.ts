@@ -45,6 +45,21 @@ export const about = [
   "At Pacific Equities Group I ship SaleSnap and partner products with design-led teams. Before that I cut load times and shipped auth and real-time features at Abstract Digital. I started in mobile with Flexi App’s QR attendance flows.",
 ];
 
+export const processSteps = [
+  {
+    title: "Discover",
+    body: "I dig into the product, the users, and the constraints — so what we build maps to real goals, not guesswork.",
+  },
+  {
+    title: "Design",
+    body: "Wireframes and UI take shape in code: intentional layouts, reusable components, and flows that feel obvious to use.",
+  },
+  {
+    title: "Deliver",
+    body: "Shipped means performant, tested, and deploy-ready — whether a marketing site, SaaS dashboard, or mobile companion.",
+  },
+];
+
 export const principles = [
   { title: "Ship the whole funnel", body: "From empty states to error paths — not just the happy screenshot." },
   { title: "Measure what users feel", body: "Load time, tap targets, and scroll jank show up in retention." },
