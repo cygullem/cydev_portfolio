@@ -1,12 +1,13 @@
 export const site = {
   name: "Clyde Cyril Gullem",
-  firstName: "Clyde",
-  brand: "Cydev®",
+  firstName: "Clyde Cyril",
+  lastName: "Gullem",
+  brand: "cygullem.dev",
   initials: "CCG",
   role: "Full-Stack Developer",
   heroStatement:
     "I BUILD USER-CENTERED WEB PRODUCTS THAT ARE SIMPLE, SMART, AND BUILT TO SHIP.",
-  profileImage: "https://github.com/cygullem.png",
+  profileImage: "/hero-portrait.png",
   location: "Bogo City, Cebu, Philippines",
   email: "cygullem@gmail.com",
   phone: "+63 930 149 2207",
