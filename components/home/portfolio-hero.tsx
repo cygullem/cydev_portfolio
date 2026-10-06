@@ -246,7 +246,7 @@ export function PortfolioHero() {
           <ProfilePhoto
             width={36}
             height={36}
-            className="size-9 rounded-full object-cover"
+            className="size-9 object-contain"
           />
           <div className="min-w-0">
             <p className="text-[10px] font-medium uppercase tracking-wider text-white/70">
