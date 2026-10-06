@@ -94,16 +94,16 @@ export function HeroScene() {
                 →
               </span>
             </Link>
-            <a
-              href="#contact"
+            <Link
+              href="/#contact"
               className="inline-flex h-12 cursor-pointer items-center rounded-full border border-line px-7 text-sm font-medium transition-colors hover:bg-surface"
             >
               Get in touch
-            </a>
+            </Link>
             <ul className="flex gap-1 sm:ml-2">
               {socials.map(({ href, label, Icon }) => (
                 <li key={label}>
-                  <a
+                  <Link
                     href={href}
                     aria-label={label}
                     target={label !== "Email" ? "_blank" : undefined}
@@ -111,7 +111,7 @@ export function HeroScene() {
                     className="grid size-11 cursor-pointer place-items-center rounded-full text-muted transition-colors hover:bg-surface hover:text-foreground"
                   >
                     <Icon />
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>

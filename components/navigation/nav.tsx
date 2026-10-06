@@ -46,22 +46,16 @@ export function Nav() {
             const current = l.match === pathname || (l.match === "/works" && pathname.startsWith("/works"));
             return (
               <li key={l.label}>
-                {l.href.startsWith("/#") ? (
-                  <Link href={l.href} aria-current={current ? "true" : undefined} className={linkClass}>
-                    {l.label}
-                  </Link>
-                ) : (
-                  <Link href={l.href} aria-current={current ? "true" : undefined} className={linkClass}>
-                    {l.label}
-                  </Link>
-                )}
+                <Link href={l.href} aria-current={current ? "true" : undefined} className={linkClass}>
+                  {l.label}
+                </Link>
               </li>
             );
           })}
         </ul>
 
         <div className="flex items-center gap-1">
-          <a
+          <Link
             href={site.github}
             target="_blank"
             rel="noopener noreferrer"
@@ -69,8 +63,8 @@ export function Nav() {
             className="hidden size-9 place-items-center rounded-md text-muted transition-colors hover:bg-surface hover:text-foreground sm:grid"
           >
             <GitHub />
-          </a>
-          <a
+          </Link>
+          <Link
             href={site.linkedin}
             target="_blank"
             rel="noopener noreferrer"
@@ -78,7 +72,7 @@ export function Nav() {
             className="hidden size-9 place-items-center rounded-md text-muted transition-colors hover:bg-surface hover:text-foreground sm:grid"
           >
             <LinkedIn />
-          </a>
+          </Link>
           <button
             type="button"
             onClick={() => setOpen((o) => !o)}
@@ -106,15 +100,9 @@ export function Nav() {
               <ul className="mx-auto flex max-w-360 flex-col px-5 py-4">
                 {homeAnchors.map((l) => (
                   <li key={l.label}>
-                    {l.href.startsWith("/#") ? (
-                      <a href={l.href} onClick={() => setOpen(false)} className="block py-3 font-display text-2xl tracking-tight">
-                        {l.label}
-                      </a>
-                    ) : (
-                      <Link href={l.href} onClick={() => setOpen(false)} className="block py-3 font-display text-2xl tracking-tight">
-                        {l.label}
-                      </Link>
-                    )}
+                    <Link href={l.href} onClick={() => setOpen(false)} className="block py-3 font-display text-2xl tracking-tight">
+                      {l.label}
+                    </Link>
                   </li>
                 ))}
               </ul>

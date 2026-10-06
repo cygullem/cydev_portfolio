@@ -123,21 +123,12 @@ export function PortfolioHero() {
           <ul className="hidden items-center gap-8 font-mono text-[11px] uppercase tracking-[0.2em] md:flex">
             {nav.map((item) => (
               <li key={item.label}>
-                {item.href.startsWith("/#") ? (
-                  <a
-                    href={item.href}
-                    className="cursor-pointer text-white/85 transition-colors hover:text-white"
-                  >
-                    {item.label}
-                  </a>
-                ) : (
-                  <Link
-                    href={item.href}
-                    className="cursor-pointer text-white/85 transition-colors hover:text-white"
-                  >
-                    {item.label}
-                  </Link>
-                )}
+                <Link
+                  href={item.href}
+                  className="cursor-pointer text-white/85 transition-colors hover:text-white"
+                >
+                  {item.label}
+                </Link>
               </li>
             ))}
           </ul>
@@ -157,23 +148,13 @@ export function PortfolioHero() {
           <ul className="relative z-40 border-y border-white/20 px-5 py-4 font-mono text-sm uppercase tracking-widest md:hidden">
             {nav.map((item) => (
               <li key={item.label}>
-                {item.href.startsWith("/#") ? (
-                  <Link
-                    href={item.href}
-                    onClick={() => setMenu(false)}
-                    className="block py-2"
-                  >
-                    {item.label}
-                  </Link>
-                ) : (
-                  <Link
-                    href={item.href}
-                    onClick={() => setMenu(false)}
-                    className="block py-2"
-                  >
-                    {item.label}
-                  </Link>
-                )}
+                <Link
+                  href={item.href}
+                  onClick={() => setMenu(false)}
+                  className="block py-2"
+                >
+                  {item.label}
+                </Link>
               </li>
             ))}
           </ul>
@@ -238,8 +219,8 @@ export function PortfolioHero() {
           </Link>
         )}
 
-        <a
-          href="#contact"
+        <Link
+          href="/#contact"
           data-ph-float
           className="absolute bottom-8 right-5 z-30 flex cursor-pointer items-center gap-3 rounded-sm bg-foreground px-3 py-2.5 text-background shadow-lg sm:bottom-12 sm:right-10"
         >
@@ -258,7 +239,7 @@ export function PortfolioHero() {
           <span className="grid size-8 shrink-0 place-items-center rounded-sm bg-white text-foreground">
             <ArrowUpRight className="size-4" />
           </span>
-        </a>
+        </Link>
       </div>
     </section>
   );

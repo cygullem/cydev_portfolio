@@ -51,7 +51,7 @@ export function WorkDetail({ work }: { work: Work }) {
           </h1>
           <p data-detail-in className="mt-6 max-w-2xl text-xl text-muted">{work.tagline}</p>
           {work.live && (
-            <a
+            <Link
               data-detail-in
               href={work.live}
               target="_blank"
@@ -59,7 +59,7 @@ export function WorkDetail({ work }: { work: Work }) {
               className="mt-8 inline-flex cursor-pointer items-center gap-2 rounded-full border border-line bg-surface px-5 py-2.5 text-sm font-medium transition-colors hover:border-accent"
             >
               Live site <ArrowUpRight />
-            </a>
+            </Link>
           )}
         </div>
       </div>
