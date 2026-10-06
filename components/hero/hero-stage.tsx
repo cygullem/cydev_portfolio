@@ -53,7 +53,7 @@ export function HeroStage() {
     >
       <div
         aria-hidden
-        className="absolute inset-0 rounded-2xl border border-line bg-[linear-gradient(var(--line)_1px,transparent_1px),linear-gradient(90deg,var(--line)_1px,transparent_1px)] bg-[size:24px_24px] [mask-image:radial-gradient(ellipse_at_center,black,transparent_72%)]"
+        className="absolute inset-0 rounded-2xl border border-line bg-[linear-gradient(var(--line)_1px,transparent_1px),linear-gradient(90deg,var(--line)_1px,transparent_1px)] bg-size-[24px_24px] mask-[radial-gradient(ellipse_at_center,black,transparent_72%)]"
       />
 
       <div className="absolute left-0 top-6 max-w-44 rounded-xl border border-line bg-surface/90 p-4 font-mono text-[11px] leading-5 backdrop-blur-md">
