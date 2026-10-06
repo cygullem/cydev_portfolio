@@ -179,44 +179,41 @@ export function PortfolioHero() {
           </ul>
         )}
 
-        <p
+        <div
           aria-hidden
-          className="font-hero pointer-events-none absolute left-1/2 top-[12%] z-0 -translate-x-1/2 select-none text-[clamp(4rem,22vw,16rem)] leading-none text-white/12"
+          className="pointer-events-none absolute inset-x-0 bottom-0 top-[clamp(4.5rem,10vh,6.75rem)] z-10 flex flex-col items-center overflow-visible"
         >
-          {site.firstName.toUpperCase()}
-        </p>
+          <p className="font-hero max-w-[100vw] shrink-0 select-none whitespace-nowrap px-2 text-[clamp(3.25rem,min(20vw,18svh),15rem)] leading-none text-white/15">
+            {site.firstName.toUpperCase()}
+          </p>
+          <div className="relative -mt-[clamp(0.35rem,1.2vh,0.85rem)] flex min-h-0 w-full flex-1 items-end justify-center">
+            <ProfilePhoto
+              data-ph-in
+              width={990}
+              height={1230}
+              priority
+              className="h-full w-auto max-h-full max-w-[min(100vw,52rem)] origin-bottom scale-[1.08] object-contain object-bottom drop-shadow-[0_20px_40px_rgba(0,0,0,0.15)] sm:scale-[1.12] md:scale-[1.16] lg:scale-[1.2]"
+            />
+          </div>
+        </div>
 
-        <div className="relative z-10 flex min-h-[calc(100svh-5.5rem)] flex-col px-5 pb-8 pt-4 sm:px-10 sm:pb-12">
+        <div className="relative z-20 flex min-h-[calc(100svh-5.5rem)] flex-col px-5 pb-6 pt-4 sm:px-10 sm:pb-8">
           <p data-ph-in className="font-mono text-xs text-white/70">
             ©{new Date().getFullYear()}
           </p>
 
           <p
             data-ph-in
-            className="mt-[min(28vh,12rem)] max-w-[16rem] text-[11px] font-medium uppercase leading-relaxed tracking-[0.18em] text-white sm:max-w-xs sm:text-xs"
+            className="mt-[min(22vh,10rem)] max-w-[16rem] text-[11px] font-medium uppercase leading-relaxed tracking-[0.18em] text-white sm:max-w-xs sm:text-xs"
           >
             {site.heroStatement}
           </p>
 
-          <div className="relative mx-auto mt-auto w-full max-w-lg flex-1 sm:max-w-xl md:max-w-2xl">
-            <div
-              data-ph-in
-              className="pointer-events-none absolute inset-x-0 bottom-0 h-32 bg-linear-to-t from-hero-orange via-hero-orange/80 to-transparent"
-            />
-            <ProfilePhoto
-              data-ph-in
-              width={640}
-              height={800}
-              priority
-              className="relative mx-auto h-[min(52vh,32rem)] w-auto object-contain object-bottom drop-shadow-[0_20px_40px_rgba(0,0,0,0.15)]"
-            />
-          </div>
-
           <p
             data-ph-name
-            className="font-hero relative z-20 -mt-2 text-[clamp(3.5rem,16vw,11rem)] leading-[0.85] tracking-tight sm:-mt-6"
+            className="font-hero relative mt-auto text-[clamp(3.5rem,16vw,11rem)] leading-[0.85] tracking-tight"
           >
-            {site.firstName.toUpperCase()}
+            {site.lastName.toUpperCase()}
           </p>
         </div>
 
