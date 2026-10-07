@@ -1,6 +1,7 @@
 import { site } from "@/lib/content";
 import { PortfolioHero } from "@/components/home/portfolio-hero";
 import { About } from "@/components/about/about";
+import { FeaturedWorks } from "@/components/home/featured-works";
 import { Experience } from "@/components/experience/experience";
 import { Contact } from "@/components/contact/contact";
 import { Footer } from "@/components/footer/footer";
@@ -25,6 +26,7 @@ export default function Home() {
       <PortfolioHero />
       <div className="bg-background">
         <About />
+        <FeaturedWorks />
         <Experience />
         <Contact />
         <Footer />
