@@ -164,7 +164,7 @@ export function PortfolioHero() {
           aria-hidden
           className="pointer-events-none absolute inset-x-0 bottom-0 top-[clamp(4.5rem,10vh,6.75rem)] z-10 flex flex-col items-center overflow-visible"
         >
-          <p className="font-hero max-w-[100vw] shrink-0 select-none whitespace-nowrap px-2 text-[clamp(3.25rem,min(20vw,18svh),15rem)] leading-none text-white/15">
+          <p className="font-hero max-w-[100vw] shrink-0 select-none whitespace-nowrap px-2 text-[clamp(3.25rem,min(20vw,18svh),15rem)] font-medium leading-none text-white/15">
             {site.firstName.toUpperCase()}
           </p>
           <div className="relative -mt-[clamp(0.35rem,1.2vh,0.85rem)] flex min-h-0 w-full flex-1 items-end justify-center">
