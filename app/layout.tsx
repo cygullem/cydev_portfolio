@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Archivo, Geist_Mono, Oswald, Space_Grotesk } from "next/font/google";
+import { Archivo, Geist_Mono, Instrument_Serif, Oswald, Space_Grotesk } from "next/font/google";
 import { site } from "@/lib/content";
 import { SiteChrome } from "@/components/layout/site-chrome";
 import "./globals.css";
@@ -27,6 +27,13 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+const featuredSerif = Instrument_Serif({
+  weight: "400",
+  style: ["normal", "italic"],
+  variable: "--font-featured-serif",
+  subsets: ["latin"],
+});
+
 const title = `${site.name} — ${site.role}`;
 
 export const metadata: Metadata = {
@@ -49,7 +56,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     <html
       lang="en"
       suppressHydrationWarning
-      className={`${space.variable} ${archivo.variable} ${bebas.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${space.variable} ${archivo.variable} ${bebas.variable} ${geistMono.variable} ${featuredSerif.variable} h-full antialiased`}
     >
       <head>
         <script dangerouslySetInnerHTML={{ __html: lightOnlyScript }} />
