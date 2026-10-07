@@ -53,6 +53,10 @@ body {
   font-family: var(--font-hero), var(--font-display), sans-serif;
 }
 
+.font-featured-serif {
+  font-family: var(--font-featured-serif), Georgia, "Times New Roman", serif;
+}
+
 @media (prefers-reduced-motion: no-preference) {
   html {
     scroll-behavior: smooth;
