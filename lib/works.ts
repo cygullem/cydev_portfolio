@@ -83,7 +83,7 @@ export const works: Work[] = [
     tagline: "Business operations platform",
     category: "SaaS",
     year: "2025",
-    featured: false,
+    featured: true,
     live: "https://merchantbee.com/",
     description: "Digital platform for merchant workflows and customer-facing business tools.",
     challenge: "Operators needed intuitive flows without sacrificing information density.",
