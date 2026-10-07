@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Archivo, Bebas_Neue, Geist_Mono, Space_Grotesk } from "next/font/google";
+import { Archivo, Geist_Mono, Oswald, Space_Grotesk } from "next/font/google";
 import { site } from "@/lib/content";
 import { SiteChrome } from "@/components/layout/site-chrome";
 import "./globals.css";
@@ -13,10 +13,11 @@ const space = Space_Grotesk({
 const archivo = Archivo({
   variable: "--font-archivo",
   subsets: ["latin"],
+  weight: ["400", "500", "600", "700", "800"],
 });
 
-const bebas = Bebas_Neue({
-  weight: "400",
+const bebas = Oswald({
+  weight: ["400", "500", "600", "700"],
   variable: "--font-bebas",
   subsets: ["latin"],
 });
