@@ -36,9 +36,7 @@ export function Nav() {
         className="mx-auto flex h-14 max-w-360 items-center justify-between px-5 sm:px-10"
       >
         <Link href="/" className="font-display text-sm font-semibold tracking-tight sm:text-base">
-          <span className="text-muted">{site.initials}</span>
-          <span className="mx-2 text-line">/</span>
-          {site.name.split(" ")[0]}
+          <span className="text-muted">{site.brand}</span>
         </Link>
 
         <ul className="hidden items-center gap-0.5 md:flex">
