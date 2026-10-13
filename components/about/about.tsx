@@ -116,9 +116,18 @@ export function About() {
           </div>
           <div>
             <p className="text-xs uppercase tracking-widest text-muted">Certifications</p>
-            <ul className="mt-3 space-y-2.5 text-sm text-muted">
+            <ul className="mt-3 space-y-2.5 text-sm">
               {site.certifications.map((c) => (
-                <li key={c}>{c}</li>
+                <li key={c.href}>
+                  <Link
+                    href={c.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-muted underline decoration-line underline-offset-[5px] transition-colors hover:text-accent hover:decoration-accent/40"
+                  >
+                    {c.name}
+                  </Link>
+                </li>
               ))}
             </ul>
           </div>
