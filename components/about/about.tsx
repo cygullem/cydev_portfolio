@@ -4,15 +4,8 @@ import Link from "next/link";
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { about, highlights, principles, processSteps, site } from "@/lib/content";
+import { about, principles, processSteps, site } from "@/lib/content";
 import { Skills } from "@/components/skills/skills";
-
-const metaStrip = [
-  site.location,
-  site.status.replace(/_/g, " "),
-  site.stack,
-  site.education.degree,
-];
 
 export function About() {
   const root = useRef<HTMLElement>(null);
@@ -132,9 +125,11 @@ export function About() {
         </div>
 
         <div className="mt-20 border-t border-line pt-16">
-          <div className="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
+          <div className="max-w-2xl">
             <h3 className="font-display text-xl font-semibold tracking-tight sm:text-2xl">Stack</h3>
-            <p className="text-sm text-muted">Used across shipped work in the archive.</p>
+            <p className="mt-2 text-sm leading-relaxed text-muted">
+              What I reach for to ship UI, APIs, and production deploys — linked to work in the archive where it applies.
+            </p>
           </div>
           <div className="mt-8">
             <Skills />
