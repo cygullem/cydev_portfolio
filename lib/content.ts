@@ -27,10 +27,22 @@ export const site = {
     period: "2021 — 2026",
   },
   certifications: [
-    "Software Engineer Certificate",
-    "Frontend Developer Certification",
-    "React Certification",
-    "Next.js App Router Fundamentals",
+    {
+      name: "Next.js App Router Fundamentals",
+      href: "https://nextjs.org/learn/certificate?course=dashboard-app&user=54662&certId=dashboard-app-54662-1747925138553",
+    },
+    {
+      name: "React (Basic)",
+      href: "https://www.hackerrank.com/certificates/06e0bbce7797",
+    },
+    {
+      name: "Frontend Developer (React)",
+      href: "https://www.hackerrank.com/certificates/4aabe489a9b7",
+    },
+    {
+      name: "Software Engineer",
+      href: "https://www.hackerrank.com/certificates/d0384340de97",
+    },
   ],
 };
 
