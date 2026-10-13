@@ -1,45 +1,71 @@
+import Link from "next/link";
+import { site, skills } from "@/lib/content";
 import { works } from "@/lib/works";
-import { skills } from "@/lib/content";
+
+function projectsUsing(name: string) {
+  return works.filter((p) => p.frontend.includes(name) || p.backend.includes(name));
+}
 
 export function Skills() {
   return (
-    <div className="grid gap-px overflow-hidden rounded-3xl border border-[#e5e5e5] bg-[#e5e5e5] sm:grid-cols-2">
-      {skills.map(({ group, items }) => (
-        <div key={group} className="bg-white p-6">
-          <h4 className="font-mono text-xs uppercase tracking-widest text-[#737373]">{group}</h4>
-          <ul className="mt-4 flex flex-wrap gap-2">
-            {items.map(({ name, note }) => {
-              const usedIn = works.filter(
-                (p) => p.frontend.includes(name) || p.backend.includes(name),
-              ).map((p) => p.name);
-              const detail = [note, usedIn.length ? `Used on ${usedIn.slice(0, 2).join(", ")}` : ""].filter(Boolean).join(". ");
-              const id = `skill-${group}-${name}`.toLowerCase().replace(/[^a-z0-9]+/g, "-");
-              return (
-                <li
-                  key={name}
-                  tabIndex={detail ? 0 : undefined}
-                  aria-describedby={detail ? id : undefined}
-                  className="group/chip relative rounded-md border border-[#eee] bg-[#fafafa] px-2.5 py-1 text-sm text-[#404040] transition-colors hover:border-[#e63946]/40"
-                >
-                  {name}
-                  {detail && (
-                    <>
-                      <span aria-hidden className="ml-1.5 inline-block size-1.5 rounded-full bg-[#e63946] align-middle" />
-                      <span
-                        id={id}
-                        role="tooltip"
-                        className="pointer-events-none absolute bottom-full left-0 z-10 mb-2 w-max max-w-56 rounded-md border border-[#eee] bg-white px-2.5 py-1.5 text-xs text-[#525252] opacity-0 shadow-lg transition-opacity group-hover/chip:opacity-100 group-focus-visible/chip:opacity-100"
-                      >
-                        {detail}
-                      </span>
-                    </>
-                  )}
-                </li>
-              );
-            })}
-          </ul>
-        </div>
-      ))}
+    <div className="overflow-hidden rounded-sm border border-line bg-surface">
+      <div className="border-b border-line px-5 py-4 sm:px-6">
+        <p className="text-sm text-muted">
+          <span className="font-medium text-foreground">Frontend-first</span> — {site.stack}
+        </p>
+      </div>
+
+      <div className="grid lg:grid-cols-3 lg:divide-x lg:divide-line">
+        {skills.map(({ group, items }, groupIndex) => (
+          <div
+            key={group}
+            className={`border-t border-line px-5 py-6 first:border-t-0 sm:px-6 sm:py-7 lg:border-t-0 ${
+              groupIndex === 0 ? "bg-[color-mix(in_oklab,var(--hero-orange)_4%,var(--surface))]" : "bg-surface"
+            }`}
+          >
+            <div className="flex items-center justify-between gap-3">
+              <h4 className="font-mono text-[11px] uppercase tracking-[0.2em] text-muted">{group}</h4>
+              {groupIndex === 0 && (
+                <span className="rounded-full bg-hero-orange/10 px-2 py-0.5 text-[10px] font-medium uppercase tracking-wider text-accent">
+                  Core
+                </span>
+              )}
+            </div>
+
+            <ul className="mt-5 space-y-0">
+              {items.map(({ name, note }) => {
+                const matched = projectsUsing(name);
+                const slug = matched[0]?.slug;
+                return (
+                  <li
+                    key={name}
+                    className="flex items-start justify-between gap-4 border-t border-line py-3.5 first:border-t-0 first:pt-0"
+                  >
+                    <div className="min-w-0">
+                      <p className="text-sm font-medium leading-snug text-foreground">{name}</p>
+                      {note && <p className="mt-0.5 text-xs text-muted">{note}</p>}
+                    </div>
+                    {matched.length > 0 ? (
+                      slug ? (
+                        <Link
+                          href={`/works/${slug}`}
+                          className="shrink-0 text-right text-[11px] leading-tight text-muted underline decoration-line underline-offset-2 transition-colors hover:text-accent hover:decoration-accent/40"
+                        >
+                          {matched.length > 1 ? `${matched.length} projects` : matched[0].name}
+                        </Link>
+                      ) : (
+                        <span className="shrink-0 text-[11px] text-muted">{matched[0].name}</span>
+                      )
+                    ) : (
+                      <span className="shrink-0 text-[11px] text-muted/70">Supporting</span>
+                    )}
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+        ))}
+      </div>
     </div>
   );
 }
