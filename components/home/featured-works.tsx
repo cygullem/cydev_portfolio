@@ -10,7 +10,11 @@ import { ArrowUpRight } from "@/components/icons";
 
 function workTags(work: Work): [string, string] {
   const primary = work.category === "SaaS" ? "SaaS" : work.category;
-  const secondary = work.tagline.replace(/\.$/, "").split(" ").slice(-2).join(" ");
+  const secondary = work.tagline
+    .replace(/\.$/, "")
+    .split(" ")
+    .slice(-2)
+    .join(" ");
   return [primary, secondary.charAt(0).toUpperCase() + secondary.slice(1)];
 }
 
@@ -97,7 +101,10 @@ export function FeaturedWorks() {
           </span>
         </h2>
 
-        <div data-work-grid className="relative z-20 -mt-4 grid gap-5 sm:-mt-8 sm:grid-cols-2 sm:gap-6 lg:gap-8">
+        <div
+          data-work-grid
+          className="relative z-20 -mt-4 grid gap-5 sm:-mt-8 sm:grid-cols-2 sm:gap-6 lg:gap-8"
+        >
           {showcase.map((work) => {
             const [tagA, tagB] = workTags(work);
             return (
@@ -106,7 +113,10 @@ export function FeaturedWorks() {
                 data-work-card
                 className="overflow-hidden rounded-2xl bg-white shadow-[0_20px_50px_-28px_rgba(15,23,42,0.18)] transition-shadow hover:shadow-[0_28px_60px_-24px_rgba(15,23,42,0.22)]"
               >
-                <Link href={`/works/${work.slug}`} className="group block cursor-pointer">
+                <Link
+                  href={`/works/${work.slug}`}
+                  className="group block cursor-pointer"
+                >
                   <PlaceholderPreview hue={work.hue} />
                   <div className="flex flex-col gap-4 px-5 py-5 sm:flex-row sm:items-center sm:justify-between sm:px-7 sm:py-6">
                     <h3 className="font-display text-xl font-semibold tracking-tight text-[#1e293b] transition-colors group-hover:text-[#0f172a] sm:text-2xl">
@@ -114,7 +124,10 @@ export function FeaturedWorks() {
                     </h3>
                     <div className="flex shrink-0 items-center gap-3 font-mono text-[11px] uppercase tracking-[0.12em] text-[#64748b] sm:text-xs">
                       <span>{tagA}</span>
-                      <span aria-hidden className="h-px w-10 bg-[#cbd5e1] sm:w-16" />
+                      <span
+                        aria-hidden
+                        className="h-px w-10 bg-[#cbd5e1] sm:w-16"
+                      />
                       <span>{tagB}</span>
                     </div>
                   </div>
