@@ -80,7 +80,9 @@ export const principles = [
   { title: "Design is a constraint", body: "Tight systems make better interfaces than one-off hero effects." },
 ];
 
-export const skills: { group: string; items: { name: string; note?: string }[] }[] = [
+export type SkillItem = { name: string; note?: string; projectSlugs?: string[] };
+
+export const skills: { group: string; items: SkillItem[] }[] = [
   {
     group: "Frontend",
     items: [
@@ -96,7 +98,12 @@ export const skills: { group: string; items: { name: string; note?: string }[] }
   },
   {
     group: "Backend & data",
-    items: [{ name: "Node.js" }, { name: "REST APIs" }, { name: "Firebase" }, { name: "Supabase" }],
+    items: [
+      { name: "Node.js" },
+      { name: "REST APIs" },
+      { name: "Firebase", projectSlugs: ["hr-zen"] },
+      { name: "Supabase", projectSlugs: ["salesnap", "merchantbee"] },
+    ],
   },
   {
     group: "Tooling",

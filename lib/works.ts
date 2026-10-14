@@ -34,7 +34,7 @@ export const works: Work[] = [
     ],
     impact: ["5+ shipped product experiences with the design team"],
     frontend: ["Next.js", "React", "TypeScript", "Tailwind CSS", "shadcn/ui"],
-    backend: ["REST APIs", "Node.js"],
+    backend: ["REST APIs", "Supabase", "Node.js"],
     hue: 145,
   },
   {
@@ -54,7 +54,7 @@ export const works: Work[] = [
     ],
     impact: ["~30% improvement in page load speed during Abstract Digital engagement"],
     frontend: ["Next.js", "React", "TypeScript", "Tailwind CSS"],
-    backend: ["REST APIs", "Firebase", "Node.js"],
+    backend: ["REST APIs", "Node.js"],
     hue: 210,
   },
   {
@@ -74,7 +74,7 @@ export const works: Work[] = [
     ],
     impact: [],
     frontend: ["Next.js", "React", "TypeScript", "Tailwind CSS"],
-    backend: ["REST APIs", "Supabase"],
+    backend: ["REST APIs"],
     hue: 175,
   },
   {
@@ -93,7 +93,7 @@ export const works: Work[] = [
     ],
     impact: [],
     frontend: ["React", "TypeScript", "Tailwind CSS"],
-    backend: ["REST APIs", "Node.js"],
+    backend: ["REST APIs", "Supabase", "Node.js"],
     hue: 45,
   },
   {
@@ -112,7 +112,7 @@ export const works: Work[] = [
     ],
     impact: [],
     frontend: ["Next.js", "React", "TypeScript", "Tailwind CSS"],
-    backend: ["REST APIs"],
+    backend: ["REST APIs", "Firebase"],
     hue: 265,
   },
   {
