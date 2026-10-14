@@ -36,6 +36,10 @@ body {
   color: var(--foreground);
 }
 
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
 ::selection {
   background: color-mix(in oklab, var(--hero-orange) 25%, white);
 }
