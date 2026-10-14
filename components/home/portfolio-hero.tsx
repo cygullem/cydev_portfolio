@@ -6,22 +6,11 @@ import { useEffect, useRef, useState } from "react";
 import type { ComponentProps } from "react";
 import gsap from "gsap";
 import { site } from "@/lib/content";
-import { featuredWorks, works } from "@/lib/works";
-import {
-  ArrowUpRight,
-  Close,
-  GitHub,
-  LinkedIn,
-  Menu,
-} from "@/components/icons";
+import { featuredWorks } from "@/lib/works";
+import { ArrowUpRight } from "@/components/icons";
+import { SiteNavBar } from "@/components/navigation/site-nav-bar";
 
 const spotlight = featuredWorks[0];
-const nav = [
-  { href: "/", label: "Home" },
-  { href: "/#about", label: "About" },
-  { href: "/works", label: `Work (${works.length})` },
-  { href: "/#contact", label: "Contact" },
-];
 
 function GridMarks() {
   return (
@@ -69,7 +58,6 @@ function ProfilePhoto(
 
 export function PortfolioHero() {
   const root = useRef<HTMLElement>(null);
-  const [menu, setMenu] = useState(false);
 
   useEffect(() => {
     const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -115,102 +103,7 @@ export function PortfolioHero() {
         <div className="absolute inset-x-0 bottom-0 h-px bg-white/20" />
         <GridMarks />
 
-        <header
-          data-ph-in
-          className="relative z-40 flex items-center justify-between px-5 py-6 sm:px-10 sm:py-8"
-        >
-          <Link
-            href="/"
-            className="font-display text-lg font-semibold tracking-tight sm:text-xl"
-          >
-            {site.brand}
-          </Link>
-
-          <div className="hidden items-center gap-8 md:flex">
-            <ul className="flex items-center gap-8 font-mono text-[11px] uppercase tracking-[0.2em]">
-              {nav.map((item) => (
-                <li key={item.label}>
-                  <Link
-                    href={item.href}
-                    className="cursor-pointer text-white/85 transition-colors hover:text-white"
-                  >
-                    {item.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-            <div className="flex items-center gap-1 border-l border-white/25 pl-6">
-              <Link
-                href={site.github}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="GitHub"
-                className="grid size-9 cursor-pointer place-items-center text-white/85 transition-colors hover:text-white"
-              >
-                <GitHub />
-              </Link>
-              <Link
-                href={site.linkedin}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="LinkedIn"
-                className="grid size-9 cursor-pointer place-items-center text-white/85 transition-colors hover:text-white"
-              >
-                <LinkedIn />
-              </Link>
-            </div>
-          </div>
-
-          <div className="flex items-center gap-2 md:hidden">
-            <Link
-              href={site.github}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="GitHub"
-              className="grid size-9 cursor-pointer place-items-center text-white/85 transition-colors hover:text-white"
-            >
-              <GitHub />
-            </Link>
-            <Link
-              href={site.linkedin}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="LinkedIn"
-              className="grid size-9 cursor-pointer place-items-center text-white/85 transition-colors hover:text-white"
-            >
-              <LinkedIn />
-            </Link>
-            <button
-              type="button"
-              aria-expanded={menu}
-              aria-label={menu ? "Close menu" : "Open menu"}
-              onClick={() => setMenu((o) => !o)}
-              className="flex cursor-pointer flex-col gap-1.5"
-            >
-              {menu ? (
-                <Close className="size-5" />
-              ) : (
-                <Menu className="size-5" />
-              )}
-            </button>
-          </div>
-        </header>
-
-        {menu && (
-          <ul className="relative z-40 border-y border-white/20 px-5 py-4 font-mono text-sm uppercase tracking-widest md:hidden">
-            {nav.map((item) => (
-              <li key={item.label}>
-                <Link
-                  href={item.href}
-                  onClick={() => setMenu(false)}
-                  className="block py-2"
-                >
-                  {item.label}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        )}
+        <SiteNavBar animateIn />
 
         <div
           aria-hidden
