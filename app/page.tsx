@@ -18,10 +18,12 @@ const jsonLd = {
 
 export default function Home() {
   return (
-    <>
+    <main className="hide-scrollbar">
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c") }}
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c"),
+        }}
       />
       <PortfolioHero />
       <div className="bg-background">
@@ -31,6 +33,6 @@ export default function Home() {
         <Contact />
         <Footer />
       </div>
-    </>
+    </main>
   );
 }
