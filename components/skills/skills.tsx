@@ -6,6 +6,30 @@ function projectsUsing(name: string) {
   return works.filter((p) => p.frontend.includes(name) || p.backend.includes(name));
 }
 
+function resolveProjects(slugs?: string[]) {
+  if (!slugs?.length) return [];
+  return slugs.map((slug) => works.find((w) => w.slug === slug)).filter(Boolean) as typeof works;
+}
+
+function ProjectLinks({ slugs }: { slugs: string[] }) {
+  const projects = resolveProjects(slugs);
+  if (!projects.length) return null;
+
+  return (
+    <span className="flex shrink-0 flex-col items-end gap-1 text-right text-[11px] leading-tight">
+      {projects.map((p) => (
+        <Link
+          key={p.slug}
+          href={`/works/${p.slug}`}
+          className="text-muted underline decoration-line underline-offset-2 transition-colors hover:text-accent hover:decoration-accent/40"
+        >
+          {p.name}
+        </Link>
+      ))}
+    </span>
+  );
+}
+
 export function Skills() {
   return (
     <div className="overflow-hidden rounded-sm border border-line bg-surface">
@@ -33,8 +57,9 @@ export function Skills() {
             </div>
 
             <ul className="mt-5 space-y-0">
-              {items.map(({ name, note }) => {
-                const matched = projectsUsing(name);
+              {items.map(({ name, note, projectSlugs }) => {
+                const pinned = resolveProjects(projectSlugs);
+                const matched = pinned.length ? pinned : projectsUsing(name);
                 const slug = matched[0]?.slug;
                 return (
                   <li
@@ -45,7 +70,9 @@ export function Skills() {
                       <p className="text-sm font-medium leading-snug text-foreground">{name}</p>
                       {note && <p className="mt-0.5 text-xs text-muted">{note}</p>}
                     </div>
-                    {matched.length > 0 ? (
+                    {projectSlugs?.length ? (
+                      <ProjectLinks slugs={projectSlugs} />
+                    ) : matched.length > 0 ? (
                       slug ? (
                         <Link
                           href={`/works/${slug}`}
