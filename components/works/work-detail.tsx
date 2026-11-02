@@ -7,11 +7,86 @@ import { m, useReducedMotion } from "motion/react";
 import type { Work } from "@/lib/works";
 import { works } from "@/lib/works";
 import { ArrowUpRight } from "@/components/icons";
+import { WorkGallery } from "./work-gallery";
+
+function CaseStudyBody({ work }: { work: Work }) {
+  return (
+    <div className="space-y-12">
+      <section>
+        <h2 className="font-mono text-xs uppercase tracking-widest text-muted">Overview</h2>
+        <p className="mt-4 text-lg leading-relaxed text-pretty">{work.description}</p>
+      </section>
+      <section>
+        <h2 className="font-mono text-xs uppercase tracking-widest text-muted">Challenge</h2>
+        <p className="mt-4 leading-relaxed">{work.challenge}</p>
+      </section>
+      <section>
+        <h2 className="font-mono text-xs uppercase tracking-widest text-muted">Contribution</h2>
+        <ul className="mt-4 space-y-2">
+          {work.contribution.map((c) => (
+            <li key={c} className="flex gap-3 leading-relaxed">
+              <span className="text-accent">—</span>
+              {c}
+            </li>
+          ))}
+        </ul>
+      </section>
+      {work.impact.length > 0 && (
+        <section>
+          <h2 className="font-mono text-xs uppercase tracking-widest text-muted">Impact</h2>
+          <ul className="mt-4 space-y-2 font-display text-xl font-semibold">
+            {work.impact.map((i) => (
+              <li key={i}>{i}</li>
+            ))}
+          </ul>
+        </section>
+      )}
+    </div>
+  );
+}
+
+function StackAside({ work, reduce }: { work: Work; reduce: boolean | null }) {
+  return (
+    <aside className="grid gap-6 sm:grid-cols-2 lg:grid-cols-1">
+      <m.div
+        initial={reduce ? false : { opacity: 0, x: 20 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.5, delay: 0.2 }}
+        className="rounded-2xl border border-line bg-surface p-6"
+      >
+        <h3 className="font-mono text-xs uppercase tracking-widest text-accent">Frontend</h3>
+        <ul className="mt-4 flex flex-wrap gap-2">
+          {work.frontend.map((t) => (
+            <li key={t} className="rounded-md border border-line px-2.5 py-1 font-mono text-xs">
+              {t}
+            </li>
+          ))}
+        </ul>
+      </m.div>
+      <m.div
+        initial={reduce ? false : { opacity: 0, x: 20 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.5, delay: 0.35 }}
+        className="rounded-2xl border border-line bg-surface p-6"
+      >
+        <h3 className="font-mono text-xs uppercase tracking-widest text-accent">Backend</h3>
+        <ul className="mt-4 flex flex-wrap gap-2">
+          {work.backend.map((t) => (
+            <li key={t} className="rounded-md border border-line px-2.5 py-1 font-mono text-xs">
+              {t}
+            </li>
+          ))}
+        </ul>
+      </m.div>
+    </aside>
+  );
+}
 
 export function WorkDetail({ work }: { work: Work }) {
   const hero = useRef<HTMLElement>(null);
   const reduce = useReducedMotion();
   const related = works.filter((w) => w.slug !== work.slug && w.category === work.category).slice(0, 2);
+  const gallery = work.gallery;
 
   useEffect(() => {
     if (reduce || !hero.current) return;
@@ -46,10 +121,15 @@ export function WorkDetail({ work }: { work: Work }) {
           <p data-detail-in className="mt-8 font-mono text-xs uppercase tracking-[0.25em] text-accent">
             {work.category} · {work.year}
           </p>
-          <h1 data-detail-in className="font-display mt-4 max-w-4xl text-5xl font-semibold tracking-tight sm:text-6xl lg:text-7xl">
+          <h1
+            data-detail-in
+            className="font-display mt-4 max-w-4xl text-5xl font-semibold tracking-tight sm:text-6xl lg:text-7xl"
+          >
             {work.name}
           </h1>
-          <p data-detail-in className="mt-6 max-w-2xl text-xl text-muted">{work.tagline}</p>
+          <p data-detail-in className="mt-6 max-w-2xl text-xl text-muted">
+            {work.tagline}
+          </p>
           {work.live && (
             <Link
               data-detail-in
@@ -64,71 +144,25 @@ export function WorkDetail({ work }: { work: Work }) {
         </div>
       </div>
 
-      <div className="mx-auto grid max-w-360 gap-16 px-5 py-16 sm:px-10 lg:grid-cols-[1fr_22rem] lg:gap-20 lg:py-24">
-        <div className="space-y-12">
-          <section>
-            <h2 className="font-mono text-xs uppercase tracking-widest text-muted">Overview</h2>
-            <p className="mt-4 text-lg leading-relaxed text-pretty">{work.description}</p>
-          </section>
-          <section>
-            <h2 className="font-mono text-xs uppercase tracking-widest text-muted">Challenge</h2>
-            <p className="mt-4 leading-relaxed">{work.challenge}</p>
-          </section>
-          <section>
-            <h2 className="font-mono text-xs uppercase tracking-widest text-muted">Contribution</h2>
-            <ul className="mt-4 space-y-2">
-              {work.contribution.map((c) => (
-                <li key={c} className="flex gap-3 leading-relaxed">
-                  <span className="text-accent">—</span>
-                  {c}
-                </li>
-              ))}
-            </ul>
-          </section>
-          {work.impact.length > 0 && (
-            <section>
-              <h2 className="font-mono text-xs uppercase tracking-widest text-muted">Impact</h2>
-              <ul className="mt-4 space-y-2 font-display text-xl font-semibold">
-                {work.impact.map((i) => (
-                  <li key={i}>{i}</li>
-                ))}
-              </ul>
-            </section>
-          )}
-        </div>
+      <div className="mx-auto max-w-360 px-5 py-16 sm:px-10 lg:py-24">
+        {gallery?.length ? (
+          <div className="grid gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,0.95fr)] lg:items-start lg:gap-14">
+            <CaseStudyBody work={work} />
+            <div className="lg:sticky lg:top-24">
+              <p className="mb-4 font-mono text-xs uppercase tracking-widest text-muted">Screens</p>
+              <WorkGallery images={gallery} />
+            </div>
+          </div>
+        ) : (
+          <div className="grid gap-16 lg:grid-cols-[1fr_22rem] lg:gap-20">
+            <CaseStudyBody work={work} />
+            <StackAside work={work} reduce={reduce} />
+          </div>
+        )}
 
-        <aside className="space-y-6 lg:sticky lg:top-24 lg:self-start">
-          <m.div
-            initial={reduce ? false : { opacity: 0, x: 20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            className="rounded-2xl border border-line bg-surface p-6"
-          >
-            <h3 className="font-mono text-xs uppercase tracking-widest text-accent">Frontend</h3>
-            <ul className="mt-4 flex flex-wrap gap-2">
-              {work.frontend.map((t) => (
-                <li key={t} className="rounded-md border border-line px-2.5 py-1 font-mono text-xs">
-                  {t}
-                </li>
-              ))}
-            </ul>
-          </m.div>
-          <m.div
-            initial={reduce ? false : { opacity: 0, x: 20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.5, delay: 0.35 }}
-            className="rounded-2xl border border-line bg-surface p-6"
-          >
-            <h3 className="font-mono text-xs uppercase tracking-widest text-accent">Backend</h3>
-            <ul className="mt-4 flex flex-wrap gap-2">
-              {work.backend.map((t) => (
-                <li key={t} className="rounded-md border border-line px-2.5 py-1 font-mono text-xs">
-                  {t}
-                </li>
-              ))}
-            </ul>
-          </m.div>
-        </aside>
+        <div className={`mt-16 border-t border-line pt-12 ${gallery?.length ? "" : "lg:hidden"}`}>
+          <StackAside work={work} reduce={reduce} />
+        </div>
       </div>
 
       {related.length > 0 && (
