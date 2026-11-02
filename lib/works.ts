@@ -14,6 +14,7 @@ export type Work = {
   backend: string[];
   hue: number;
   cover?: string;
+  gallery?: string[];
 };
 
 export const works: Work[] = [
@@ -25,6 +26,12 @@ export const works: Work[] = [
     year: "2025",
     featured: true,
     cover: "/projects/salesnap/SALESNAP-COVER.png",
+    gallery: [
+      "/projects/salesnap/SALESNAP-LANDING.png",
+      "/projects/salesnap/SALESNAP-EMO-NIGHTS.png",
+      "/projects/salesnap/SALESNAP-PUNCHED.png",
+      "/projects/salesnap/SALESNAP-SHHH-MATCHA.png",
+    ],
     live: "https://salesnap.com/",
     description:
       "Connects businesses with local creators and tracks creator-driven sales across campaigns.",
