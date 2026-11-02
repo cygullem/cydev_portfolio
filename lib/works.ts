@@ -13,6 +13,7 @@ export type Work = {
   frontend: string[];
   backend: string[];
   hue: number;
+  cover?: string;
 };
 
 export const works: Work[] = [
@@ -23,6 +24,7 @@ export const works: Work[] = [
     category: "Marketing",
     year: "2025",
     featured: true,
+    cover: "/projects/salesnap/SALESNAP-COVER.png",
     live: "https://salesnap.com/",
     description:
       "Connects businesses with local creators and tracks creator-driven sales across campaigns.",
