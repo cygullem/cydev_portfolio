@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
@@ -16,6 +17,24 @@ function workTags(work: Work): [string, string] {
     .slice(-2)
     .join(" ");
   return [primary, secondary.charAt(0).toUpperCase() + secondary.slice(1)];
+}
+
+function WorkPreview({ work }: { work: Work }) {
+  if (work.cover) {
+    return (
+      <div className="relative aspect-4/3 w-full overflow-hidden bg-[#e8e8e8]">
+        <Image
+          src={work.cover}
+          alt=""
+          fill
+          sizes="(max-width: 640px) 100vw, 50vw"
+          className="object-cover object-center transition-transform duration-500 group-hover:scale-[1.02]"
+        />
+      </div>
+    );
+  }
+
+  return <PlaceholderPreview hue={work.hue} />;
 }
 
 function PlaceholderPreview({ hue }: { hue: number }) {
@@ -117,7 +136,7 @@ export function FeaturedWorks() {
                   href={`/works/${work.slug}`}
                   className="group block cursor-pointer"
                 >
-                  <PlaceholderPreview hue={work.hue} />
+                  <WorkPreview work={work} />
                   <div className="flex flex-col gap-4 px-5 py-5 sm:flex-row sm:items-center sm:justify-between sm:px-7 sm:py-6">
                     <h3 className="font-display text-xl font-semibold tracking-tight text-[#1e293b] transition-colors group-hover:text-[#0f172a] sm:text-2xl">
                       {work.name}
