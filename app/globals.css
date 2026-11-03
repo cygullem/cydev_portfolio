@@ -1,26 +1,87 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #faf8f5;
+  --foreground: #1c1917;
+  --muted: #78716c;
+  --line: #e7e5e4;
+  --surface: #ffffff;
+  --accent: #c2410c;
+  --hero-orange: #ef6534;
+  --hero-orange-deep: #d94e1f;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+  --color-surface: var(--surface);
+  --color-accent: var(--accent);
+  --color-hero-orange: var(--hero-orange);
+  --color-hero-orange-deep: var(--hero-orange-deep);
+  --font-sans: var(--font-space);
   --font-mono: var(--font-geist-mono);
+  --font-display: var(--font-archivo);
+  --font-hero: var(--font-bebas);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-padding-top: 5rem;
+  color-scheme: light;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+::selection {
+  background: color-mix(in oklab, var(--hero-orange) 25%, white);
+}
+
+:focus-visible {
+  outline: 2px solid var(--hero-orange);
+  outline-offset: 3px;
+}
+
+.font-display {
+  font-family: var(--font-display), var(--font-sans), system-ui, sans-serif;
+}
+
+.font-hero {
+  font-family: var(--font-hero), var(--font-display), sans-serif;
+}
+
+.font-featured-serif {
+  font-family: var(--font-featured-serif), Georgia, "Times New Roman", serif;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+@keyframes about-marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.about-marquee-track {
+  animation: about-marquee 42s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .about-marquee-track {
+    animation: none;
+  }
 }
