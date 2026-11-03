@@ -53,6 +53,7 @@ export const works: Work[] = [
     category: "SaaS",
     year: "2025",
     featured: true,
+    cover: "/projects/spendowl/SPENDOWL-COVER.png",
     live: "https://spendowl.com/",
     description: "Helps businesses manage budgets, approvals, payments, and expenses in one workflow.",
     challenge: "Finance teams lacked clear visibility into spend across approval stages.",
@@ -73,6 +74,7 @@ export const works: Work[] = [
     category: "SaaS",
     year: "2025",
     featured: true,
+    cover: "/projects/ondafit/ONDAFIT-COVER.png",
     live: "https://onda.fit/",
     description: "Lets players discover courts, check availability, and book sessions online.",
     challenge: "Booking flows had to stay fast on mobile with real-time availability.",
@@ -94,6 +96,7 @@ export const works: Work[] = [
     year: "2025",
     featured: true,
     live: "https://merchantbee.com/",
+    cover: "/projects/merchantbee/MERCHANTBEE-COVER.png",
     description: "Digital platform for merchant workflows and customer-facing business tools.",
     challenge: "Operators needed intuitive flows without sacrificing information density.",
     contribution: [
