@@ -56,6 +56,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     <html
       lang="en"
       suppressHydrationWarning
+      data-scroll-behavior="smooth"
       className={`${space.variable} ${archivo.variable} ${bebas.variable} ${geistMono.variable} ${featuredSerif.variable} h-full antialiased`}
     >
       <head>
