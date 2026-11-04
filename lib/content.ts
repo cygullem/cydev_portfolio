@@ -13,6 +13,7 @@ export const site = {
   phone: "+63 930 149 2207",
   github: "https://github.com/cygullem",
   linkedin: "https://www.linkedin.com/in/clyde-cyril-gullem-114a67349/",
+  resumePdf: "/RESUME/ClydeCyril_Gullem_FULLSTACK_DEVELOPER.pdf",
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000",
   headline: "Shipping interfaces that feel as considered as the products behind them.",
   summary:
@@ -25,6 +26,13 @@ export const site = {
     degree: "B.S. Information Technology",
     school: "Cebu Roosevelt Memorial Colleges",
     period: "2021 — 2026",
+  },
+  professionalReference: {
+    name: "Richard Juevesano",
+    role: "Senior Full-Stack Developer",
+    company: "Pacific Equities Group",
+    phone: "0917-555-3474",
+    email: "richard@abstract.ph",
   },
   certifications: [
     {

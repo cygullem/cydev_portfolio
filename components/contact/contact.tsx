@@ -14,6 +14,41 @@ function InfoCard({ label, children }: { label: string; children: ReactNode }) {
   );
 }
 
+function ReferenceCard() {
+  const ref = site.professionalReference;
+  const tel = `tel:+63${ref.phone.replace(/\D/g, "").replace(/^0/, "")}`;
+
+  return (
+    <div className="flex min-h-38 flex-col justify-between bg-[#e8e8e8] p-6 sm:col-span-2 sm:min-h-42 sm:p-8">
+      <p className="text-sm text-muted">
+        Reference · {ref.company}
+      </p>
+      <div className="mt-6 grid gap-4 sm:mt-0 sm:grid-cols-[minmax(0,1fr)_auto] sm:items-end sm:gap-10">
+        <div className="min-w-0">
+          <p className="font-display text-lg font-semibold uppercase leading-snug tracking-tight text-foreground sm:text-xl">
+            {ref.name}
+          </p>
+          <p className="mt-1 max-w-xs text-sm leading-snug text-muted">{ref.role}</p>
+        </div>
+        <p className="flex flex-wrap items-baseline gap-x-4 gap-y-1 font-mono text-sm sm:justify-end sm:text-right">
+          <Link href={tel} className="cursor-pointer text-foreground hover:text-hero-orange-deep">
+            {ref.phone}
+          </Link>
+          <span aria-hidden className="text-muted">
+            ·
+          </span>
+          <Link
+            href={`mailto:${ref.email}`}
+            className="cursor-pointer break-all text-foreground hover:text-hero-orange-deep"
+          >
+            {ref.email}
+          </Link>
+        </p>
+      </div>
+    </div>
+  );
+}
+
 export function Contact() {
   const year = new Date().getFullYear();
   const mailto = `mailto:${site.email}?subject=${encodeURIComponent("Let's talk — portfolio")}`;
@@ -71,6 +106,7 @@ export function Contact() {
                 {site.email}
               </Link>
             </InfoCard>
+            <ReferenceCard />
           </div>
         </div>
       </div>
