@@ -149,7 +149,7 @@ export function PortfolioHero() {
             data-ph-float
             className="absolute right-[8%] top-[42%] z-30 hidden w-38 cursor-pointer overflow-hidden rounded-sm 2 text-foreground transition-transform hover:scale-[1.02] sm:block lg:right-[14%] lg:w-42"
           >
-            <div className="relative aspect-square w-full overflow-hidden rounded-sm bg-[#e8e8e8]">
+            <div className="relative aspect-square w-full overflow-hidden rounded-lg bg-[#e8e8e8]">
               {spotlight.cover ? (
                 <Image
                   src={spotlight.cover}
