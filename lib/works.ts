@@ -56,6 +56,10 @@ export const works: Work[] = [
     year: "2025",
     featured: true,
     cover: projectAsset("/projects/spendowl/SPENDOWL-COVER.png"),
+    gallery: [
+      projectAsset("/projects/spendowl/SPENDOWL-LANDING.png"),
+      projectAsset("/projects/spendowl/SPENDOWL-FEATURES.png"),
+    ],
     live: "https://spendowl.com/",
     description: "Helps businesses manage budgets, approvals, payments, and expenses in one workflow.",
     challenge: "Finance teams lacked clear visibility into spend across approval stages.",
@@ -77,6 +81,10 @@ export const works: Work[] = [
     year: "2025",
     featured: true,
     cover: projectAsset("/projects/ondafit/ONDAFIT-COVER.png"),
+    gallery: [
+      projectAsset("/projects/ondafit/ONDAFIT-LANDING.png"),
+      projectAsset("/projects/ondafit/ONDAFIT-MOBILEAPP.png"),
+    ],
     live: "https://onda.fit/",
     description: "Lets players discover courts, check availability, and book sessions online.",
     challenge: "Booking flows had to stay fast on mobile with real-time availability.",
@@ -99,6 +107,10 @@ export const works: Work[] = [
     featured: true,
     live: "https://merchantbee.com/",
     cover: projectAsset("/projects/merchantbee/MERCHANTBEE-COVER.png"),
+    gallery: [
+      projectAsset("/projects/merchantbee/MERCHANTBEE-LANDING.png"),
+      projectAsset("/projects/merchantbee/MERCHANTBEE-FEATURES.png"),
+    ],
     description: "Digital platform for merchant workflows and customer-facing business tools.",
     challenge: "Operators needed intuitive flows without sacrificing information density.",
     contribution: [
@@ -118,6 +130,10 @@ export const works: Work[] = [
     year: "2025",
     featured: false,
     live: "https://hrzen.com/",
+    gallery: [
+      projectAsset("/projects/hrzen/HRZEN-LANDING.png"),
+      projectAsset("/projects/hrzen/HRZEN-PRICING.png"),
+    ],
     description: "Human resource management with employee-facing and admin experiences.",
     challenge: "HR tools often feel heavy; the UI had to stay approachable at scale.",
     contribution: [
@@ -137,6 +153,11 @@ export const works: Work[] = [
     year: "2025",
     featured: false,
     live: "https://qrwise.com/influencer-marketing",
+    gallery: [
+      projectAsset("/projects/qrwise/QRWISE-LANDING.png"),
+      projectAsset("/projects/qrwise/QRWISE-INTEGRATIONS.png"),
+      projectAsset("/projects/qrwise/QRWISE-INFLUENCERMARKETING.png"),
+    ],
     description: "Analytics and creator-driven marketing for business operations.",
     challenge: "Marketing data had to be readable at a glance for non-technical users.",
     contribution: [
@@ -156,6 +177,9 @@ export const works: Work[] = [
     year: "2025",
     featured: false,
     live: "https://getpunched.com",
+    gallery: [
+      projectAsset("/projects/punched-ecommerce/PUNCHED-LANDING.png"),
+    ],
     description: "Product browsing and checkout experience for a coffee brand.",
     challenge: "Balance brand storytelling with a frictionless purchase path.",
     contribution: [
@@ -175,6 +199,9 @@ export const works: Work[] = [
     year: "2025",
     featured: false,
     live: "https://locacheesecakes.com",
+    gallery: [
+      projectAsset("/projects/loca-cheesecakes/LOCA-LANDING.png")
+    ],
     description: "Online catalog and ordering for a local dessert brand.",
     challenge: "Customers needed quick product discovery on mobile-first traffic.",
     contribution: [
