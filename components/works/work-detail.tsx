@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef, type ReactNode } from "react";
 import gsap from "gsap";
@@ -18,7 +19,7 @@ function MetaBlock({
   title,
   children,
 }: {
-  icon: React.ReactNode;
+  icon: ReactNode;
   title: string;
   children: ReactNode;
 }) {
@@ -77,7 +78,7 @@ function CaseStudySections({ work }: { work: Work }) {
 
 export function WorkDetail({ work }: { work: Work }) {
   const hero = useRef<HTMLElement>(null);
-  const galleryImages = work.gallery?.length ? work.gallery : work.cover ? [work.cover] : [];
+  const galleryImages = work.gallery ?? [];
 
   useEffect(() => {
     const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -110,32 +111,51 @@ export function WorkDetail({ work }: { work: Work }) {
             <span className="mx-2">/</span>
             <span className="text-foreground">{work.name}</span>
           </nav>
-          <p
-            data-detail-in
-            className="mt-8 font-mono text-xs uppercase tracking-[0.28em] text-accent"
-          >
-            {work.category} · {work.year}
-          </p>
-          <h1
-            data-detail-in
-            className="font-display mt-4 max-w-4xl text-[clamp(2.75rem,8vw,4.5rem)] font-semibold leading-[1.02] tracking-tight"
-          >
-            {work.name}
-          </h1>
-          <p data-detail-in className="mt-5 max-w-2xl text-lg text-muted sm:text-xl">
-            {work.tagline}
-          </p>
-          {work.live && (
-            <Link
-              data-detail-in
-              href={work.live}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="mt-8 inline-flex cursor-pointer items-center gap-2 rounded-full border border-line bg-surface px-5 py-2.5 text-sm font-medium shadow-sm transition-colors hover:border-accent"
-            >
-              Live site <ArrowUpRight className="size-4" />
-            </Link>
-          )}
+
+          <div className="mt-8 grid gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,0.88fr)] lg:items-center lg:gap-12 xl:gap-16">
+            <div className="min-w-0">
+              <p
+                data-detail-in
+                className="font-mono text-xs uppercase tracking-[0.28em] text-accent"
+              >
+                {work.category} · {work.year}
+              </p>
+              <h1
+                data-detail-in
+                className="font-display mt-4 text-[clamp(2.75rem,8vw,4.5rem)] font-semibold leading-[1.02] tracking-tight"
+              >
+                {work.name}
+              </h1>
+              <p data-detail-in className="mt-5 max-w-2xl text-lg text-muted sm:text-xl">
+                {work.tagline}
+              </p>
+              {work.live && (
+                <Link
+                  data-detail-in
+                  href={work.live}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-8 inline-flex cursor-pointer items-center gap-2 rounded-full border border-line bg-surface px-5 py-2.5 text-sm font-medium shadow-sm transition-colors hover:border-accent"
+                >
+                  Live site <ArrowUpRight className="size-4" />
+                </Link>
+              )}
+            </div>
+
+            {work.cover ? (
+              <div data-detail-in className="relative min-w-0 lg:justify-self-end">
+                <Image
+                  src={work.cover}
+                  alt=""
+                  width={1200}
+                  height={900}
+                  priority
+                  sizes="(max-width: 1024px) 100vw, 42vw"
+                  className="h-auto w-full max-w-md object-contain drop-shadow-[0_28px_56px_-24px_rgba(15,23,42,0.4)] lg:max-w-none"
+                />
+              </div>
+            ) : null}
+          </div>
         </div>
       </header>
 
