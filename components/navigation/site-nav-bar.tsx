@@ -21,14 +21,19 @@ export function SiteNavBar({ animateIn }: { animateIn?: boolean }) {
     if (!menu) return;
     const onKey = (e: KeyboardEvent) => e.key === "Escape" && setMenu(false);
     addEventListener("keydown", onKey);
-    return () => removeEventListener("keydown", onKey);
+    const prevOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      removeEventListener("keydown", onKey);
+      document.body.style.overflow = prevOverflow;
+    };
   }, [menu]);
 
   return (
     <>
       <header
         {...(animateIn ? { "data-ph-in": true } : {})}
-        className="relative z-40 flex items-center justify-between px-5 py-6 sm:px-10 sm:py-8"
+        className={`relative flex items-center justify-between px-5 py-6 sm:px-10 sm:py-8 ${menu ? "z-70" : "z-40"}`}
       >
         <Link
           href="/"
@@ -103,17 +108,32 @@ export function SiteNavBar({ animateIn }: { animateIn?: boolean }) {
         </div>
       </header>
 
-      {menu && (
-        <ul className="relative z-40 border-y border-white/20 px-5 py-4 font-mono text-sm uppercase tracking-widest md:hidden">
-          {primaryNav.map((item) => (
-            <li key={item.label}>
-              <Link href={item.href} onClick={() => setMenu(false)} className="block py-2">
-                {item.label}
-              </Link>
-            </li>
-          ))}
-        </ul>
-      )}
+      {menu ? (
+        <div
+          role="dialog"
+          aria-modal="true"
+          aria-label="Site navigation"
+          className="fixed inset-0 z-60 bg-hero-orange md:hidden"
+        >
+          <div className="mx-auto flex h-full max-w-[100rem] flex-col border-x border-white/20">
+            <nav className="flex flex-1 flex-col justify-center px-8 pb-28 pt-28">
+              <ul className="font-mono text-lg uppercase tracking-[0.2em]">
+                {primaryNav.map((item) => (
+                  <li key={item.label} className="border-b border-white/15 last:border-b-0">
+                    <Link
+                      href={item.href}
+                      onClick={() => setMenu(false)}
+                      className="block py-4 text-white/90 transition-colors hover:text-white"
+                    >
+                      {item.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </nav>
+          </div>
+        </div>
+      ) : null}
     </>
   );
 }
