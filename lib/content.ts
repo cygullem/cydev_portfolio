@@ -26,6 +26,13 @@ export const site = {
     school: "Cebu Roosevelt Memorial Colleges",
     period: "2021 — 2026",
   },
+  professionalReference: {
+    name: "Richard Juevesano",
+    role: "Senior Full-Stack Developer",
+    company: "Pacific Equities Group",
+    phone: "0917-555-3474",
+    email: "richard@abstract.ph",
+  },
   certifications: [
     {
       name: "Next.js App Router Fundamentals",
