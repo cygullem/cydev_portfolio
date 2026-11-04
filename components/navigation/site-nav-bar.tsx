@@ -10,6 +10,7 @@ const primaryNav = [
   { href: "/", label: "Home" },
   { href: "/#about", label: "About" },
   { href: "/works", label: `Work (${works.length})` },
+  { href: "/resume", label: "Resume" },
   { href: "/#contact", label: "Contact" },
 ];
 
