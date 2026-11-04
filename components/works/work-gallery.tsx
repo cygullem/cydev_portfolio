@@ -22,7 +22,7 @@ function ScreenFrame({
             height={1100}
             priority={priority}
             sizes="(max-width: 1024px) 100vw, 52vw"
-            className="relative h-auto w-full rounded-lg border border-line/80 bg-surface shadow-[0_20px_50px_-28px_rgba(15,23,42,0.28)]"
+            className="relative h-auto w-full rounded-lg border border-line/80 bg-surface object-contain shadow-[0_20px_50px_-28px_rgba(15,23,42,0.28)]"
           />
         ) : (
           <div
