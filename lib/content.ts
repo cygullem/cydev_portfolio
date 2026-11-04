@@ -55,7 +55,7 @@ export const highlights = [
 
 export const about = [
   "I build full-stack web products where layout, motion, and performance are part of the feature — not polish added at the end.",
-  "At Pacific Equities Group I ship SaleSnap and partner products with design-led teams. Before that I cut load times and shipped auth and real-time features at Abstract Digital. I started in mobile with Flexi App’s QR attendance flows.",
+  "At Pacific Equities Group I shipped landing pages for every product and contributed to HRZEN, SaleSnap, and QRwise with design-led teams. I cut load times and shipped auth and real-time features. At TechTalk I started in mobile with Flexi App’s QR attendance flows.",
 ];
 
 export const processSteps = [
