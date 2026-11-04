@@ -7,6 +7,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   return [
     { url: base, lastModified: new Date(), changeFrequency: "monthly", priority: 1 },
     { url: `${base}/works`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.9 },
+    { url: `${base}/resume`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.85 },
     ...workSlugs().map((slug) => ({
       url: `${base}/works/${slug}`,
       lastModified: new Date(),
