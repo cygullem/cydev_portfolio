@@ -147,18 +147,31 @@ export function PortfolioHero() {
           <Link
             href={`/works/${spotlight.slug}`}
             data-ph-float
-            className="absolute right-[8%] top-[42%] z-30 hidden w-38 cursor-pointer overflow-hidden rounded-sm bg-white p-2 text-foreground shadow-xl transition-transform hover:scale-[1.02] sm:block lg:right-[14%] lg:w-42"
+            className="absolute right-[8%] top-[42%] z-30 hidden w-38 cursor-pointer overflow-hidden rounded-sm 2 text-foreground transition-transform hover:scale-[1.02] sm:block lg:right-[14%] lg:w-42"
           >
-            <div
-              className="aspect-square w-full rounded-sm"
-              style={{
-                background: `linear-gradient(145deg, hsl(${spotlight.hue} 60% 88%), hsl(${spotlight.hue} 40% 70%))`,
-              }}
-            />
-            <p className="mt-2 font-display text-sm font-semibold leading-tight">
+            <div className="relative aspect-square w-full overflow-hidden rounded-sm bg-[#e8e8e8]">
+              {spotlight.cover ? (
+                <Image
+                  src={spotlight.cover}
+                  alt="Project Cover Photo"
+                  fill
+                  sizes="168px"
+                  className="object-cover object-center"
+                />
+              ) : (
+                <div
+                  aria-hidden
+                  className="absolute inset-0"
+                  style={{
+                    background: `linear-gradient(145deg, hsl(${spotlight.hue} 60% 88%), hsl(${spotlight.hue} 40% 70%))`,
+                  }}
+                />
+              )}
+            </div>
+            <p className="mt-2 font-display text-sm font-semibold leading-tight text-white">
               {spotlight.name}
             </p>
-            <p className="font-mono text-[10px] text-muted">
+            <p className="font-mono text-[10px] text-white/90">
               /{spotlight.category}
             </p>
           </Link>
