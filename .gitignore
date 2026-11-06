@@ -24,6 +24,9 @@
 .DS_Store
 *.pem
 
+# generated (copied from pdfjs-dist in postinstall)
+public/pdf.worker.min.mjs
+
 # debug
 npm-debug.log*
 yarn-debug.log*
