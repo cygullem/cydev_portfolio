@@ -13,7 +13,7 @@ export const site = {
   phone: "+63 930 149 2207",
   github: "https://github.com/cygullem",
   linkedin: "https://www.linkedin.com/in/clyde-cyril-gullem-114a67349/",
-  resumePdf: "/RESUME/ClydeCyril_Gullem_FULLSTACK_DEVELOPER.pdf",
+  resumePdf: "/RESUME/Clyde_Cyril_Gullem_Full-Stack_Developer_Resume.pdf",
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000",
   headline: "Shipping interfaces that feel as considered as the products behind them.",
   summary:

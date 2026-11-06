@@ -7,12 +7,14 @@
     "dev:turbo": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "postinstall": "node scripts/copy-pdf-worker.mjs"
   },
   "dependencies": {
     "gsap": "^3.15.0",
     "motion": "^13.4.6",
     "next": "16.3.7",
+    "pdfjs-dist": "^6.5.438",
     "react": "19.2.8",
     "react-dom": "19.2.8"
   },
