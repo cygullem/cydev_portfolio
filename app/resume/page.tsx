@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { site } from "@/lib/content";
 import { ArrowUpRight } from "@/components/icons";
+import { ResumePdfViewer } from "@/components/resume/resume-pdf-viewer";
 
 export const metadata: Metadata = {
   title: "Resume",
@@ -33,17 +34,13 @@ export default function ResumePage() {
       </header>
 
       <div className="mt-8 overflow-hidden rounded-xl border border-line bg-surface shadow-sm">
-        <iframe
-          title={`${site.name} resume`}
-          src={pdf}
-          className="h-[min(80svh,56rem)] w-full bg-[#525659]"
-        />
+        <ResumePdfViewer src={pdf} />
       </div>
 
       <p className="mt-6 text-sm text-muted">
-        PDF not loading?{" "}
+        Prefer the system viewer?{" "}
         <Link href={pdf} target="_blank" rel="noopener noreferrer" className="text-accent underline underline-offset-4">
-          Open the file in a new tab
+          Open the PDF in a new tab
         </Link>
         .
       </p>
