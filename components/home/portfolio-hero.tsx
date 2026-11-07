@@ -2,15 +2,57 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useSyncExternalStore } from "react";
 import type { ComponentProps } from "react";
 import gsap from "gsap";
 import { site } from "@/lib/content";
-import { featuredWorks } from "@/lib/works";
+import { featuredWorks, projectCovers } from "@/lib/works";
+import dynamic from "next/dynamic";
 import { ArrowUpRight } from "@/components/icons";
 import { SiteNavBar } from "@/components/navigation/site-nav-bar";
 
 const spotlight = featuredWorks[0];
+
+const ImageTrail = dynamic(() => import("@/components/ImageTrail"), {
+  ssr: false,
+});
+
+function subscribeMotionPreference(onStoreChange: () => void) {
+  const reduced = matchMedia("(prefers-reduced-motion: reduce)");
+  reduced.addEventListener("change", onStoreChange);
+  return () => reduced.removeEventListener("change", onStoreChange);
+}
+
+function subscribePointerFine(onStoreChange: () => void) {
+  const fine = matchMedia("(pointer: fine)");
+  fine.addEventListener("change", onStoreChange);
+  return () => fine.removeEventListener("change", onStoreChange);
+}
+
+function useHeroImageTrail() {
+  const pointerFine = useSyncExternalStore(
+    subscribePointerFine,
+    () => matchMedia("(pointer: fine)").matches,
+    () => false,
+  );
+  const reducedMotion = useSyncExternalStore(
+    subscribeMotionPreference,
+    () => matchMedia("(prefers-reduced-motion: reduce)").matches,
+    () => true,
+  );
+  const enabled = pointerFine && !reducedMotion;
+
+  useEffect(() => {
+    if (!enabled) return;
+    for (const src of projectCovers) {
+      const img = new window.Image();
+      img.decoding = "async";
+      img.src = src;
+    }
+  }, [enabled]);
+
+  return enabled;
+}
 
 function GridMarks() {
   return (
@@ -58,6 +100,7 @@ function ProfilePhoto(
 
 export function PortfolioHero() {
   const root = useRef<HTMLElement>(null);
+  const trailEnabled = useHeroImageTrail();
 
   useEffect(() => {
     const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -102,6 +145,28 @@ export function PortfolioHero() {
         <div className="absolute inset-x-0 top-0 h-px bg-white/20" />
         <div className="absolute inset-x-0 bottom-0 h-px bg-white/20" />
         <GridMarks />
+
+        {trailEnabled ? (
+          <div
+            aria-hidden
+            className="pointer-events-none absolute inset-0 z-12 overflow-hidden"
+          >
+            <ImageTrail
+              eventTargetRef={root}
+              items={projectCovers}
+              size={128}
+              aspectRatio={1.12}
+              radius={10}
+              threshold={70}
+              stack={3}
+              rotation={12}
+              sizeVariance={0.15}
+              alignToMotion
+              tilt={8}
+              className="z-0 h-full w-full"
+            />
+          </div>
+        ) : null}
 
         <SiteNavBar animateIn />
 
