@@ -6,7 +6,7 @@ import { useEffect, useRef, useState, useSyncExternalStore } from "react";
 import type { ComponentProps } from "react";
 import gsap from "gsap";
 import { site } from "@/lib/content";
-import { featuredWorks, projectCovers } from "@/lib/works";
+import { featuredWorks, projectTrailCovers } from "@/lib/works";
 import dynamic from "next/dynamic";
 import { ArrowUpRight } from "@/components/icons";
 import { SiteNavBar } from "@/components/navigation/site-nav-bar";
@@ -44,7 +44,7 @@ function useHeroImageTrail() {
 
   useEffect(() => {
     if (!enabled) return;
-    for (const src of projectCovers) {
+    for (const src of projectTrailCovers) {
       const img = new window.Image();
       img.decoding = "async";
       img.src = src;
@@ -153,16 +153,12 @@ export function PortfolioHero() {
           >
             <ImageTrail
               eventTargetRef={root}
-              items={projectCovers}
-              size={128}
-              aspectRatio={1.12}
-              radius={10}
-              threshold={70}
-              stack={3}
-              rotation={12}
-              sizeVariance={0.15}
-              alignToMotion
-              tilt={8}
+              items={projectTrailCovers}
+              size={190}
+              threshold={80}
+              appearScale={0}
+              zoom={2.4}
+              flash={0.6}
               className="z-0 h-full w-full"
             />
           </div>
