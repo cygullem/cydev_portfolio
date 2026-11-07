@@ -235,6 +235,10 @@ export const works: Work[] = [
   },
 ];
 
+export const projectCovers = works
+  .map((work) => work.cover)
+  .filter((cover): cover is string => Boolean(cover));
+
 export const featuredWorks = works.filter((w) => w.featured);
 
 export function getWork(slug: string) {
