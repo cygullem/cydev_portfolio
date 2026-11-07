@@ -13,7 +13,7 @@ import { SiteNavBar } from "@/components/navigation/site-nav-bar";
 
 const spotlight = featuredWorks[0];
 
-const ImageTrail = dynamic(() => import("@/components/ImageTrail"), {
+const ImageTrail = dynamic(() => import("@/components/react-bits/ImageTrail"), {
   ssr: false,
 });
 
