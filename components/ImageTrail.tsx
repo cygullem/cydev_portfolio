@@ -71,6 +71,14 @@ const createTrail = (
   let active = 0;
   let lastAngle = 0;
   let destroyed = false;
+  let rect = container.getBoundingClientRect();
+  const syncRect = () => {
+    rect = container.getBoundingClientRect();
+  };
+  const resizeObserver = new ResizeObserver(syncRect);
+  resizeObserver.observe(container);
+  window.addEventListener('resize', syncRect, { passive: true });
+  window.addEventListener('scroll', syncRect, { passive: true, capture: true });
 
   const settle = () => {
     active = Math.max(0, active - 1);
@@ -110,9 +118,8 @@ const createTrail = (
       lastAngle = toAngle;
     }
     const scale = 1 + gsap.utils.random(-0.5, 0.6) * cfg.sizeVariance;
-    const box = container.getBoundingClientRect();
-    const tiltX = box.height ? -((mouse.y - box.height / 2) / (box.height / 2)) * cfg.tilt : 0;
-    const tiltY = box.width ? ((mouse.x - box.width / 2) / (box.width / 2)) * cfg.tilt : 0;
+    const tiltX = rect.height ? -((mouse.y - rect.height / 2) / (rect.height / 2)) * cfg.tilt : 0;
+    const tiltY = rect.width ? ((mouse.x - rect.width / 2) / (rect.width / 2)) * cfg.tilt : 0;
     const drift = cfg.drift > 0;
     const slide = drift ? 0.6 * cfg.drift : 0;
 
@@ -148,13 +155,24 @@ const createTrail = (
       },
       0
     );
-    if (cfg.zoom !== 1 || cfg.flash > 0) {
+    if (cfg.zoom !== 1) {
       timeline.fromTo(
         img.inner,
-        { scale: cfg.zoom, filter: `brightness(${1 + cfg.flash * 1.5})` },
-        { duration: 0.5, ease: 'power1', scale: 1, filter: 'brightness(1)' },
+        { scale: cfg.zoom, force3D: true },
+        { duration: 0.5, ease: 'power1', scale: 1, force3D: true },
         0
       );
+    }
+    if (cfg.flash > 0) {
+      const flashEl = img.inner.querySelector<HTMLElement>('[data-trail-flash]');
+      if (flashEl) {
+        timeline.fromTo(
+          flashEl,
+          { opacity: Math.min(1, cfg.flash) },
+          { duration: 0.5, ease: 'power1', opacity: 0 },
+          0
+        );
+      }
     }
 
     if (cfg.stack > 0) {
@@ -208,7 +226,6 @@ const createTrail = (
   };
 
   const onMove = (e: MouseEvent | TouchEvent) => {
-    const rect = container.getBoundingClientRect();
     const point = 'touches' in e ? e.touches[0] : e;
     if (!point) return;
     mouse.x = point.clientX - rect.left;
@@ -228,6 +245,9 @@ const createTrail = (
   return () => {
     destroyed = true;
     if (raf) cancelAnimationFrame(raf);
+    resizeObserver.disconnect();
+    window.removeEventListener('resize', syncRect);
+    window.removeEventListener('scroll', syncRect, true);
     target.removeEventListener('mousemove', onMove);
     target.removeEventListener('touchmove', onMove);
     images.forEach(img => {
@@ -314,14 +334,25 @@ export default function ImageTrail({
     >
       {items.map((url, i) => (
         <div
-          className="pointer-events-none absolute left-0 top-0 aspect-(--trail-aspect) w-(--trail-size) overflow-hidden rounded-(--trail-radius) opacity-0 will-change-[transform,filter]"
+          className="pointer-events-none absolute left-0 top-0 aspect-(--trail-aspect) w-(--trail-size) overflow-hidden rounded-(--trail-radius) opacity-0 transform-[translateZ(0)]"
           data-trail-image=""
           key={i}
         >
-          <div
-            className="absolute -left-2.5 -top-2.5 h-[calc(100%+20px)] w-[calc(100%+20px)] bg-cover bg-center"
-            style={{ backgroundImage: `url(${url})` }}
-          />
+          <div className="relative h-full w-full origin-center">
+            {/* eslint-disable-next-line @next/next/no-img-element -- trail uses optimized /_next/image URLs */}
+            <img
+              alt=""
+              className="absolute -left-2.5 -top-2.5 h-[calc(100%+20px)] w-[calc(100%+20px)] max-w-none object-cover object-center"
+              decoding="async"
+              draggable={false}
+              src={url}
+            />
+            <div
+              aria-hidden
+              className="pointer-events-none absolute inset-0 bg-white opacity-0"
+              data-trail-flash=""
+            />
+          </div>
         </div>
       ))}
     </div>
