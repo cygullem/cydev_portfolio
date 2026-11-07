@@ -1,4 +1,4 @@
-import { projectAsset } from "@/lib/project-asset";
+import { projectAsset, trailCoverUrl } from "@/lib/project-asset";
 
 export type Work = {
   slug: string;
@@ -238,6 +238,8 @@ export const works: Work[] = [
 export const projectCovers = works
   .map((work) => work.cover)
   .filter((cover): cover is string => Boolean(cover));
+
+export const projectTrailCovers = projectCovers.map(trailCoverUrl);
 
 export const featuredWorks = works.filter((w) => w.featured);
 
