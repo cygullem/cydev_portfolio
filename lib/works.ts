@@ -31,8 +31,8 @@ export const works: Work[] = [
     gallery: [
       projectAsset("/projects/salesnap/SALESNAP-LANDING.png"),
       projectAsset("/projects/salesnap/SALESNAP-EMO-NIGHTS.png"),
-      projectAsset("/projects/salesnap/SALESNAP-PUNCHED.png"),
       projectAsset("/projects/salesnap/SALESNAP-SHHH-MATCHA.png"),
+      projectAsset("/projects/salesnap/SALESNAP-PUNCHED.png"),
     ],
     live: "https://salesnap.com/",
     description:
