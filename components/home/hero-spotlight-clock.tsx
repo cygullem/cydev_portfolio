@@ -12,7 +12,6 @@ import {
 } from "react";
 import gsap from "gsap";
 import { heroSpotlightClockProjectAssets } from "@/lib/content";
-
 const STEP_S = 5;
 const CARD_PX = 150;
 const RADIUS = `calc(${CARD_PX}px + 5.25rem)`;
@@ -82,9 +81,10 @@ function SpotlightCard({
         <Image
           src={item.cover}
           alt=""
-          fill
-          sizes="150px"
-          className="object-cover object-center"
+          width={150}
+          height={150}
+          unoptimized
+          className="size-full object-cover object-center"
         />
       </div>
       <p
@@ -155,7 +155,7 @@ export function HeroSpotlightClock() {
     <div
       data-ph-float
       aria-label="Project highlights"
-      className="pointer-events-none absolute right-0 top-1/2 z-30 hidden -translate-y-1/2 overflow-x-clip overflow-y-visible sm:block"
+      className="pointer-events-none absolute right-0 top-1/2 z-100 hidden -translate-y-1/2 overflow-x-clip overflow-y-visible sm:block"
       style={
         {
           "--radius": RADIUS,
@@ -167,7 +167,7 @@ export function HeroSpotlightClock() {
     >
       <div
         ref={dialRef}
-        className="absolute right-0 top-1/2 size-(--dial) origin-center will-change-transform"
+        className="absolute right-0 top-1/2 size-var(--dial) origin-center will-change-transform"
         style={{ "--dial-rotate": "0deg" } as CSSProperties}
       >
         {items.map((item, i) => {
