@@ -60,3 +60,9 @@ export const Close = (p: P) => (
     <path d="M6 6l12 12M18 6 6 18" />
   </svg>
 );
+
+export const Plus = (p: P) => (
+  <svg {...stroke} {...p}>
+    <path d="M12 5v14M5 12h14" />
+  </svg>
+);
