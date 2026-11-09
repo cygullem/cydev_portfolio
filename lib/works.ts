@@ -31,8 +31,8 @@ export const works: Work[] = [
     gallery: [
       projectAsset("/projects/salesnap/SALESNAP-LANDING.png"),
       projectAsset("/projects/salesnap/SALESNAP-EMO-NIGHTS.png"),
-      projectAsset("/projects/salesnap/SALESNAP-PUNCHED.png"),
       projectAsset("/projects/salesnap/SALESNAP-SHHH-MATCHA.png"),
+      projectAsset("/projects/salesnap/SALESNAP-PUNCHED.png"),
     ],
     live: "https://salesnap.com/",
     description:
@@ -130,8 +130,10 @@ export const works: Work[] = [
     year: "2025",
     featured: false,
     live: "https://hrzen.com/",
+    cover: projectAsset("/projects/hrzen/HRZEN-COVER.png"),
     gallery: [
       projectAsset("/projects/hrzen/HRZEN-LANDING.png"),
+      projectAsset("/projects/hrzen/HRZEN-INTEGRATIONS.png"),
       projectAsset("/projects/hrzen/HRZEN-PRICING.png"),
     ],
     description: "Human resource management with employee-facing and admin experiences.",
@@ -153,6 +155,7 @@ export const works: Work[] = [
     year: "2025",
     featured: false,
     live: "https://qrwise.com/influencer-marketing",
+    cover: projectAsset("/projects/qrwise/QRWISE-COVER.png"),
     gallery: [
       projectAsset("/projects/qrwise/QRWISE-LANDING.png"),
       projectAsset("/projects/qrwise/QRWISE-INTEGRATIONS.png"),
@@ -177,8 +180,10 @@ export const works: Work[] = [
     year: "2025",
     featured: false,
     live: "https://getpunched.com",
+    cover: projectAsset("/projects/punched-ecommerce/PUNCHED-COVER.png"),
     gallery: [
       projectAsset("/projects/punched-ecommerce/PUNCHED-LANDING.png"),
+      projectAsset("/projects/punched-ecommerce/PUNCHED-LOCATIONS.png"),
     ],
     description: "Product browsing and checkout experience for a coffee brand.",
     challenge: "Balance brand storytelling with a frictionless purchase path.",
@@ -199,8 +204,11 @@ export const works: Work[] = [
     year: "2025",
     featured: false,
     live: "https://locacheesecakes.com",
+    cover: projectAsset("/projects/loca-cheesecakes/LOCA-COVER.png"),
     gallery: [
-      projectAsset("/projects/loca-cheesecakes/LOCA-LANDING.png")
+      projectAsset("/projects/loca-cheesecakes/LOCA-LANDING.png"),
+      projectAsset("/projects/loca-cheesecakes/LOCA-MENU.png"),
+      projectAsset("/projects/loca-cheesecakes/LOCA-MENU-2.png"),
     ],
     description: "Online catalog and ordering for a local dessert brand.",
     challenge: "Customers needed quick product discovery on mobile-first traffic.",

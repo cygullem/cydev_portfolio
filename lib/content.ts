@@ -1,3 +1,5 @@
+import { projectAsset } from "./project-asset";
+
 export const site = {
   name: "Clyde Cyril Gullem",
   firstName: "Clyde Cyril",
@@ -154,3 +156,46 @@ export const experience = [
     stack: ["React Native", "Node.js", "TypeScript"],
   },
 ];
+
+export const heroSpotlightClockProjectAssets = [
+  {
+    slug: "salesnap",
+    label: "/marketing",
+    cover: projectAsset("/projects/salesnap/SALESNAP-COVER.png"),
+  },
+  {
+    slug: "hr-zen",
+    label: "/hr-software",
+    cover: projectAsset("/projects/hrzen/HRZEN-COVER.png"),
+  },
+  {
+    slug: "qrwise",
+    label: "/point-of-sale",
+    cover: projectAsset("/projects/qrwise/QRWISE-COVER.png"),
+  },
+  {
+    slug: "punched-ecommerce",
+    label: "/e-commerce",
+    cover: projectAsset("/projects/punched-ecommerce/PUNCHED-COVER.png"),
+  },
+  {
+    slug: "merchantbee",
+    label: "/inventory-management",
+    cover: projectAsset("/projects/merchantbee/MERCHANTBEE-COVER.png"),
+  },
+  {
+    slug: "loca-cheesecakes",
+    label: "/point-of-sale",
+    cover: projectAsset("/projects/loca-cheesecakes/LOCA-COVER.png"),
+  },
+  {
+    slug: "onda-fit",
+    label: "/booking-system",
+    cover: projectAsset("/projects/ondafit/ONDAFIT-COVER.png"),
+  },
+  {
+    slug: "spendowl",
+    label: "/saas",
+    cover: projectAsset("/projects/spendowl/SPENDOWL-COVER.png"),
+  },
+] as const;
