@@ -18,7 +18,7 @@ const jsonLd = {
 
 export default function Home() {
   return (
-    <div className="hide-scrollbar">
+    <div>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
