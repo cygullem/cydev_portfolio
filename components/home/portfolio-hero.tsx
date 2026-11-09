@@ -8,7 +8,6 @@ import gsap from "gsap";
 import { site } from "@/lib/content";
 import { featuredWorks, projectTrailCovers } from "@/lib/works";
 import dynamic from "next/dynamic";
-import { ArrowUpRight } from "@/components/icons";
 
 const spotlight = featuredWorks[0];
 
@@ -234,28 +233,6 @@ export function PortfolioHero() {
             </p>
           </Link>
         )}
-
-        <Link
-          href="/#contact"
-          data-ph-float
-          className="absolute bottom-28 right-5 z-30 flex cursor-pointer items-center gap-3 rounded-sm bg-foreground px-3 py-2.5 text-background shadow-lg sm:bottom-28 sm:right-10"
-        >
-          <ProfilePhoto
-            width={36}
-            height={36}
-            className="size-9 object-contain"
-          />
-          <div className="min-w-0">
-            <p className="text-[10px] font-medium uppercase tracking-wider text-white/70">
-              Let&apos;s Talk
-            </p>
-            <p className="truncate text-sm font-semibold">{site.firstName}</p>
-            <p className="truncate text-[10px] text-white/60">{site.role}</p>
-          </div>
-          <span className="grid size-8 shrink-0 place-items-center rounded-sm bg-white text-foreground">
-            <ArrowUpRight className="size-4" />
-          </span>
-        </Link>
       </div>
     </section>
   );
