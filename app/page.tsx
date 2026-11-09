@@ -18,7 +18,7 @@ const jsonLd = {
 
 export default function Home() {
   return (
-    <main className="hide-scrollbar">
+    <div className="hide-scrollbar">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
@@ -33,6 +33,6 @@ export default function Home() {
         <Contact />
         <Footer />
       </div>
-    </main>
+    </div>
   );
 }

@@ -2,15 +2,56 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useSyncExternalStore } from "react";
 import type { ComponentProps } from "react";
 import gsap from "gsap";
 import { site } from "@/lib/content";
-import { featuredWorks } from "@/lib/works";
+import { featuredWorks, projectTrailCovers } from "@/lib/works";
+import dynamic from "next/dynamic";
 import { ArrowUpRight } from "@/components/icons";
-import { SiteNavBar } from "@/components/navigation/site-nav-bar";
 
 const spotlight = featuredWorks[0];
+
+const ImageTrail = dynamic(() => import("@/components/react-bits/ImageTrail"), {
+  ssr: false,
+});
+
+function subscribeMotionPreference(onStoreChange: () => void) {
+  const reduced = matchMedia("(prefers-reduced-motion: reduce)");
+  reduced.addEventListener("change", onStoreChange);
+  return () => reduced.removeEventListener("change", onStoreChange);
+}
+
+function subscribePointerFine(onStoreChange: () => void) {
+  const fine = matchMedia("(pointer: fine)");
+  fine.addEventListener("change", onStoreChange);
+  return () => fine.removeEventListener("change", onStoreChange);
+}
+
+function useHeroImageTrail() {
+  const pointerFine = useSyncExternalStore(
+    subscribePointerFine,
+    () => matchMedia("(pointer: fine)").matches,
+    () => false,
+  );
+  const reducedMotion = useSyncExternalStore(
+    subscribeMotionPreference,
+    () => matchMedia("(prefers-reduced-motion: reduce)").matches,
+    () => true,
+  );
+  const enabled = pointerFine && !reducedMotion;
+
+  useEffect(() => {
+    if (!enabled) return;
+    for (const src of projectTrailCovers) {
+      const img = new window.Image();
+      img.decoding = "async";
+      img.src = src;
+    }
+  }, [enabled]);
+
+  return enabled;
+}
 
 function GridMarks() {
   return (
@@ -58,6 +99,7 @@ function ProfilePhoto(
 
 export function PortfolioHero() {
   const root = useRef<HTMLElement>(null);
+  const trailEnabled = useHeroImageTrail();
 
   useEffect(() => {
     const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -96,18 +138,34 @@ export function PortfolioHero() {
     <section
       ref={root}
       aria-label="Introduction"
-      className="relative bg-hero-orange text-white"
+      className="relative isolate z-0 overflow-hidden bg-hero-orange text-white"
     >
       <div className="relative mx-auto min-h-svh max-w-[100rem] border-x border-white/20">
         <div className="absolute inset-x-0 top-0 h-px bg-white/20" />
         <div className="absolute inset-x-0 bottom-0 h-px bg-white/20" />
         <GridMarks />
 
-        <SiteNavBar animateIn />
+        {trailEnabled ? (
+          <div
+            aria-hidden
+            className="pointer-events-none absolute inset-0 z-12 overflow-hidden"
+          >
+            <ImageTrail
+              eventTargetRef={root}
+              items={projectTrailCovers}
+              size={190}
+              threshold={80}
+              appearScale={0}
+              zoom={2.4}
+              flash={0.6}
+              className="z-0 h-full w-full"
+            />
+          </div>
+        ) : null}
 
         <div
           aria-hidden
-          className="pointer-events-none absolute inset-x-0 bottom-0 top-[clamp(4.5rem,10vh,6.75rem)] z-10 flex flex-col items-center overflow-visible"
+          className="pointer-events-none absolute inset-x-0 bottom-0 top-10 z-10 flex flex-col items-center overflow-visible"
         >
           <p className="font-hero max-w-[100vw] shrink-0 select-none whitespace-nowrap px-2 text-[clamp(3.25rem,min(20vw,18svh),15rem)] font-medium leading-none text-white/15">
             {site.firstName.toUpperCase()}
@@ -180,7 +238,7 @@ export function PortfolioHero() {
         <Link
           href="/#contact"
           data-ph-float
-          className="absolute bottom-8 right-5 z-30 flex cursor-pointer items-center gap-3 rounded-sm bg-foreground px-3 py-2.5 text-background shadow-lg sm:bottom-12 sm:right-10"
+          className="absolute bottom-28 right-5 z-30 flex cursor-pointer items-center gap-3 rounded-sm bg-foreground px-3 py-2.5 text-background shadow-lg sm:bottom-28 sm:right-10"
         >
           <ProfilePhoto
             width={36}

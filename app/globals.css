@@ -27,7 +27,8 @@
 }
 
 html {
-  scroll-padding-top: 5rem;
+  scroll-padding-top: 2.75rem;
+  scroll-padding-bottom: 6rem;
   color-scheme: light;
 }
 
@@ -80,8 +81,13 @@ body {
   animation: about-marquee 42s linear infinite;
 }
 
+.site-ticker-track {
+  animation: about-marquee 36s linear infinite;
+}
+
 @media (prefers-reduced-motion: reduce) {
-  .about-marquee-track {
+  .about-marquee-track,
+  .site-ticker-track {
     animation: none;
   }
 }

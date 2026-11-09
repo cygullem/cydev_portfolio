@@ -53,7 +53,7 @@ export function ResumePdfViewer({ src }: Props) {
           canvas.width = Math.floor(viewport.width);
           canvas.height = Math.floor(viewport.height);
           canvas.className =
-            "mx-auto block max-h-none max-w-full bg-white shadow-[0_2px_12px_rgba(0,0,0,0.15)]";
+            "mx-auto block max-h-none max-w-full bg-white";
 
           const pageWrap = document.createElement("div");
           pageWrap.className = "mb-6 flex justify-center last:mb-0";
@@ -82,7 +82,7 @@ export function ResumePdfViewer({ src }: Props) {
   }, [src]);
 
   return (
-    <div className="relative min-h-[min(80svh,56rem)] overflow-y-auto bg-[#525659] p-4 sm:p-6">
+    <div className="relative min-h-[min(80svh,56rem)] overflow-y-auto  sm:p-6">
       {loading ? (
         <p className="py-16 text-center font-mono text-sm text-white/75">Loading PDF…</p>
       ) : null}
