@@ -9,7 +9,6 @@ import { site } from "@/lib/content";
 import { featuredWorks, projectTrailCovers } from "@/lib/works";
 import dynamic from "next/dynamic";
 import { ArrowUpRight } from "@/components/icons";
-import { SiteNavBar } from "@/components/navigation/site-nav-bar";
 
 const spotlight = featuredWorks[0];
 
@@ -164,11 +163,9 @@ export function PortfolioHero() {
           </div>
         ) : null}
 
-        <SiteNavBar animateIn />
-
         <div
           aria-hidden
-          className="pointer-events-none absolute inset-x-0 bottom-0 top-[clamp(4.5rem,10vh,6.75rem)] z-10 flex flex-col items-center overflow-visible"
+          className="pointer-events-none absolute inset-x-0 bottom-0 top-10 z-10 flex flex-col items-center overflow-visible"
         >
           <p className="font-hero max-w-[100vw] shrink-0 select-none whitespace-nowrap px-2 text-[clamp(3.25rem,min(20vw,18svh),15rem)] font-medium leading-none text-white/15">
             {site.firstName.toUpperCase()}
@@ -241,7 +238,7 @@ export function PortfolioHero() {
         <Link
           href="/#contact"
           data-ph-float
-          className="absolute bottom-8 right-5 z-30 flex cursor-pointer items-center gap-3 rounded-sm bg-foreground px-3 py-2.5 text-background shadow-lg sm:bottom-12 sm:right-10"
+          className="absolute bottom-28 right-5 z-30 flex cursor-pointer items-center gap-3 rounded-sm bg-foreground px-3 py-2.5 text-background shadow-lg sm:bottom-28 sm:right-10"
         >
           <ProfilePhoto
             width={36}
