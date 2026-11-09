@@ -138,7 +138,7 @@ export function PortfolioHero() {
     <section
       ref={root}
       aria-label="Introduction"
-      className="relative bg-hero-orange text-white"
+      className="relative isolate z-0 overflow-hidden bg-hero-orange text-white"
     >
       <div className="relative mx-auto min-h-svh max-w-[100rem] border-x border-white/20">
         <div className="absolute inset-x-0 top-0 h-px bg-white/20" />
