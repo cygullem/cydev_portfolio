@@ -66,7 +66,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <div id="top" />
         <Link
           href="#main"
-          className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-60 focus:rounded-md focus:bg-foreground focus:px-4 focus:py-2 focus:text-white"
+          className="sr-only focus:not-sr-only focus:fixed focus:top-12 focus:left-3 focus:z-80 focus:rounded-md focus:bg-foreground focus:px-4 focus:py-2 focus:text-white"
         >
           Skip to content
         </Link>
