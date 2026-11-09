@@ -164,7 +164,7 @@ export const heroSpotlightClockProjectAssets = [
     cover: projectAsset("/projects/salesnap/SALESNAP-COVER.png"),
   },
   {
-    slug: "hrzen",
+    slug: "hr-zen",
     label: "/hr-software",
     cover: projectAsset("/projects/hrzen/HRZEN-COVER.png"),
   },
