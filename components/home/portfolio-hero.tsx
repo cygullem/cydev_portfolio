@@ -1,15 +1,13 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
 import { useEffect, useRef, useState, useSyncExternalStore } from "react";
 import type { ComponentProps } from "react";
 import gsap from "gsap";
 import { site } from "@/lib/content";
-import { featuredWorks, projectTrailCovers } from "@/lib/works";
+import { projectTrailCovers } from "@/lib/works";
+import { HeroSpotlightClock } from "@/components/home/hero-spotlight-clock";
 import dynamic from "next/dynamic";
-
-const spotlight = featuredWorks[0];
 
 const ImageTrail = dynamic(() => import("@/components/react-bits/ImageTrail"), {
   ssr: false,
@@ -137,7 +135,7 @@ export function PortfolioHero() {
     <section
       ref={root}
       aria-label="Introduction"
-      className="relative isolate z-0 overflow-hidden bg-hero-orange text-white"
+      className="relative isolate z-0 overflow-x-clip overflow-y-visible bg-hero-orange text-white"
     >
       <div className="relative mx-auto min-h-svh max-w-[100rem] border-x border-white/20">
         <div className="absolute inset-x-0 top-0 h-px bg-white/20" />
@@ -200,39 +198,7 @@ export function PortfolioHero() {
           </p>
         </div>
 
-        {spotlight && (
-          <Link
-            href={`/works/${spotlight.slug}`}
-            data-ph-float
-            className="absolute right-[8%] top-[42%] z-30 hidden w-38 cursor-pointer overflow-hidden rounded-sm 2 text-foreground transition-transform hover:scale-[1.02] sm:block lg:right-[14%] lg:w-42"
-          >
-            <div className="relative aspect-square w-full overflow-hidden rounded-lg bg-[#e8e8e8]">
-              {spotlight.cover ? (
-                <Image
-                  src={spotlight.cover}
-                  alt="Project Cover Photo"
-                  fill
-                  sizes="168px"
-                  className="object-cover object-center"
-                />
-              ) : (
-                <div
-                  aria-hidden
-                  className="absolute inset-0"
-                  style={{
-                    background: `linear-gradient(145deg, hsl(${spotlight.hue} 60% 88%), hsl(${spotlight.hue} 40% 70%))`,
-                  }}
-                />
-              )}
-            </div>
-            <p className="mt-2 font-display text-sm font-semibold leading-tight text-white">
-              {spotlight.name}
-            </p>
-            <p className="font-mono text-[10px] text-white/90">
-              /{spotlight.category}
-            </p>
-          </Link>
-        )}
+        <HeroSpotlightClock />
       </div>
     </section>
   );
