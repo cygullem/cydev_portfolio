@@ -6,6 +6,7 @@ export const site = {
   lastName: "Gullem",
   brand: "cygullem.dev",
   initials: "CCG",
+  logo: "/svg/logo.svg",
   role: "Full-Stack Developer",
   heroStatement:
     "I BUILD USER-CENTERED WEB PRODUCTS THAT ARE SIMPLE, SMART, AND BUILT TO SHIP.",
@@ -15,8 +16,8 @@ export const site = {
   phone: "+63 930 149 2207",
   github: "https://github.com/cygullem",
   linkedin: "https://www.linkedin.com/in/clyde-cyril-gullem-114a67349/",
-  resumePdf: "/RESUME/Clyde_Cyril_Gullem_Full-Stack_Developer_Resume.pdf",
-  url: process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000",
+  resumePdf: "/RESUME/Clyde_Cyril_Gullem-Full-Stack-Developer-Resume.pdf",
+  url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://cygullem.dev",
   headline: "Shipping interfaces that feel as considered as the products behind them.",
   summary:
     "Full-stack developer with Next.js, TypeScript, and Tailwind — from campaign dashboards to booking flows and mobile attendance tools.",
@@ -174,7 +175,7 @@ export const heroSpotlightClockProjectAssets = [
     cover: projectAsset("/projects/qrwise/QRWISE-COVER.png"),
   },
   {
-    slug: "punched-ecommerce",
+    slug: "punched-coffee",
     label: "/e-commerce",
     cover: projectAsset("/projects/punched-ecommerce/PUNCHED-COVER.png"),
   },

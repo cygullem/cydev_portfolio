@@ -1,7 +1,14 @@
-import type { Metadata, Viewport } from "next";
-import { Archivo, Geist_Mono, Instrument_Serif, Oswald, Space_Grotesk } from "next/font/google";
-import { site } from "@/lib/content";
+import type { Viewport } from "next";
+import Script from "next/script";
+import {
+  Archivo,
+  Geist_Mono,
+  Instrument_Serif,
+  Oswald,
+  Space_Grotesk,
+} from "next/font/google";
 import { SiteChrome } from "@/components/layout/site-chrome";
+import { rootMetadata } from "@/lib/seo";
 import "./globals.css";
 import Link from "next/link";
 
@@ -34,16 +41,7 @@ const featuredSerif = Instrument_Serif({
   subsets: ["latin"],
 });
 
-const title = `${site.name} — ${site.role}`;
-
-export const metadata: Metadata = {
-  metadataBase: new URL(site.url),
-  title: { default: title, template: `%s — ${site.name}` },
-  description: site.description,
-  alternates: { canonical: "/" },
-  openGraph: { type: "website", url: "/", siteName: site.name, title, description: site.description },
-  twitter: { card: "summary_large_image", title, description: site.description },
-};
+export const metadata = rootMetadata();
 
 export const viewport: Viewport = {
   themeColor: "#ef6534",
@@ -59,10 +57,10 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       data-scroll-behavior="smooth"
       className={`${space.variable} ${archivo.variable} ${bebas.variable} ${geistMono.variable} ${featuredSerif.variable} h-full antialiased`}
     >
-      <head>
-        <script dangerouslySetInnerHTML={{ __html: lightOnlyScript }} />
-      </head>
       <body className="min-h-full flex flex-col font-sans">
+        <Script id="theme-light-only" strategy="beforeInteractive">
+          {lightOnlyScript}
+        </Script>
         <div id="top" />
         <Link
           href="#main"
