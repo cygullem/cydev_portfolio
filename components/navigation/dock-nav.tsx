@@ -8,6 +8,7 @@ import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { site } from "@/lib/content";
 import { dockLinks, overlayLinks, overflowLinks, type NavLink } from "@/lib/nav";
 import { Close, GitHub, LinkedIn, Plus } from "@/components/icons";
+import { LogoIcon } from "@/components/icon";
 
 function linkProps(item: NavLink) {
   return item.external
@@ -87,9 +88,10 @@ export function DockNav() {
         <div className="relative flex items-center gap-0.5 rounded-full bg-[#161412] px-1.5 py-1.5 text-[#f4efe6] shadow-[0_18px_50px_rgba(0,0,0,0.35)] sm:gap-1">
           <Link
             href="/"
-            className="font-hero grid h-10 shrink-0 place-items-center px-2.5 text-xl tracking-[0.06em] sm:px-3"
+            aria-label={`${site.name} — home`}
+            className="grid h-10 shrink-0 place-items-center px-2.5 sm:px-3"
           >
-            {site.initials}
+            <LogoIcon className="h-7 w-auto text-[#f4efe6]" aria-hidden />
           </Link>
 
           <ul className="hidden items-center md:flex">
