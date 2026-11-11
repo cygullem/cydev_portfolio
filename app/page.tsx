@@ -1,4 +1,5 @@
 import { site } from "@/lib/content";
+import { OG_IMAGE_PATH } from "@/lib/seo";
 import { PortfolioHero } from "@/components/home/portfolio-hero";
 import { About } from "@/components/about/about";
 import { FeaturedWorks } from "@/components/home/featured-works";
@@ -8,12 +9,52 @@ import { Footer } from "@/components/footer/footer";
 
 const jsonLd = {
   "@context": "https://schema.org",
-  "@type": "Person",
-  name: site.name,
-  jobTitle: site.role,
-  url: site.url,
-  email: `mailto:${site.email}`,
-  sameAs: [site.github, site.linkedin],
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": `${site.url}/#website`,
+      url: site.url,
+      name: site.brand,
+      description: site.description,
+      inLanguage: "en-US",
+      publisher: { "@id": `${site.url}/#person` },
+    },
+    {
+      "@type": "Person",
+      "@id": `${site.url}/#person`,
+      name: site.name,
+      givenName: site.firstName,
+      familyName: site.lastName,
+      jobTitle: site.role,
+      description: site.summary,
+      url: site.url,
+      image: `${site.url}${OG_IMAGE_PATH}`,
+      email: site.email,
+      telephone: site.phone,
+      address: {
+        "@type": "PostalAddress",
+        addressLocality: "Bogo City",
+        addressRegion: "Cebu",
+        addressCountry: "PH",
+      },
+      alumniOf: {
+        "@type": "CollegeOrUniversity",
+        name: site.education.school,
+      },
+      sameAs: [site.github, site.linkedin],
+      knowsAbout: site.stack.split(" · "),
+    },
+    {
+      "@type": "ProfessionalService",
+      "@id": `${site.url}/#service`,
+      name: `${site.name} — ${site.role}`,
+      url: site.url,
+      image: `${site.url}${OG_IMAGE_PATH}`,
+      areaServed: "PH",
+      email: site.email,
+      telephone: site.phone,
+    },
+  ],
 };
 
 export default function Home() {
