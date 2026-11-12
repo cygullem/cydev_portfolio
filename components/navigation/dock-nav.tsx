@@ -204,6 +204,7 @@ export function DockNav() {
                 aria-modal="true"
                 aria-label="Site navigation"
                 id={menuId}
+                data-lenis-prevent
                 initial={reduce ? false : { y: "110%" }}
                 animate={{ y: 0 }}
                 exit={reduce ? undefined : { y: "110%" }}
