@@ -4,19 +4,25 @@ import Image from "next/image";
 import Link from "next/link";
 import {
   useEffect,
-  useMemo,
   useRef,
   useState,
   useSyncExternalStore,
   type CSSProperties,
 } from "react";
-import gsap from "gsap";
 import { heroSpotlightClockProjectAssets } from "@/lib/content";
-const STEP_S = 5;
+
+const STEP_MS = 5000;
+const MOVE_MS = 1200;
+const EASE = "cubic-bezier(0.65, 0, 0.35, 1)";
 const CARD_PX = 150;
 const RADIUS = `calc(${CARD_PX}px + 5.25rem)`;
+/** Spoke angle of the focused slot: 9 o'clock, the innermost visible position. */
+const FOCUS_DEG = 180;
 
-type ClockItem = (typeof heroSpotlightClockProjectAssets)[number];
+const items = heroSpotlightClockProjectAssets;
+const stepDeg = 360 / items.length;
+
+type ClockItem = (typeof items)[number];
 
 function subscribeReduced(onStoreChange: () => void) {
   const mq = matchMedia("(prefers-reduced-motion: reduce)");
@@ -32,33 +38,30 @@ function useReducedMotion() {
   );
 }
 
-function syncDialRotate(el: HTMLElement) {
-  const rotate = Number(gsap.getProperty(el, "rotate")) || 0;
-  el.style.setProperty("--dial-rotate", `${rotate}deg`);
-}
-
 function shortestDelta(deg: number) {
   let d = ((deg % 360) + 360) % 360;
   if (d > 180) d -= 360;
   return d;
 }
 
-function lensStrength(deltaDeg: number, stepDeg: number) {
+function lensStrength(deltaDeg: number) {
   const steps = Math.min(Math.abs(deltaDeg) / stepDeg, 3);
   return {
     scale: 1.1 - steps * 0.14,
     opacity: 1 - steps * 0.2,
-    isFocus: Math.abs(deltaDeg) < stepDeg * 0.45,
+    isFocus: steps < 0.45,
   };
 }
 
 function SpotlightCard({
   item,
+  rotate,
   scale,
   opacity,
   isFocus,
 }: {
   item: ClockItem;
+  rotate: number;
   scale: number;
   opacity: number;
   isFocus: boolean;
@@ -66,29 +69,32 @@ function SpotlightCard({
   return (
     <Link
       href={`/works/${item.slug}`}
-      className="block size-37.5 origin-center"
+      className="block size-37.5 origin-center will-change-[transform,opacity]"
       style={{
-        transform: `scale(${scale})`,
+        // Counter-rotates the dial with identical timing, so the card stays upright.
+        transform: `rotate(${rotate}deg) scale(${scale})`,
         opacity,
-        transition: "transform 0.45s ease, opacity 0.45s ease",
+        transition: `transform ${MOVE_MS}ms ${EASE}, opacity ${MOVE_MS}ms ${EASE}`,
       }}
     >
       <div
-        className={`relative size-37.5 overflow-hidden rounded-lg border bg-white/10 shadow-[0_10px_36px_-14px_rgba(0,0,0,0.5)] ${
+        className={`relative size-37.5 overflow-hidden rounded-lg border bg-white/10 shadow-[0_10px_36px_-14px_rgba(0,0,0,0.5)] transition-colors duration-500 ${
           isFocus ? "border-white/50" : "border-white/20"
         }`}
       >
         <Image
           src={item.cover}
           alt=""
-          width={150}
-          height={150}
-          unoptimized
+          width={CARD_PX}
+          height={CARD_PX}
+          sizes={`${CARD_PX}px`}
+          loading="eager"
+          draggable={false}
           className="size-full object-cover object-center"
         />
       </div>
       <p
-        className={`mt-2 truncate font-mono text-[10px] tracking-wide ${
+        className={`mt-2 truncate font-mono text-[10px] tracking-wide transition-colors duration-500 ${
           isFocus ? "text-white" : "text-white/55"
         }`}
       >
@@ -100,96 +106,80 @@ function SpotlightCard({
 
 export function HeroSpotlightClock() {
   const reduced = useReducedMotion();
-  const items = useMemo(() => [...heroSpotlightClockProjectAssets], []);
-  const count = items.length;
-  const dialRef = useRef<HTMLDivElement>(null);
-  const spinRef = useRef<gsap.core.Tween | null>(null);
-  const [lensDeg, setLensDeg] = useState(0);
+  const shellRef = useRef<HTMLDivElement>(null);
+  const [step, setStep] = useState(0);
 
-  const stepDeg = count > 0 ? 360 / count : 0;
-
+  // One state change per tick; the movement itself is CSS transitions on
+  // transform/opacity, which run on the compositor and stay smooth while the
+  // main thread is busy (e.g. the cursor image trail).
   useEffect(() => {
-    const el = dialRef.current;
-    if (reduced || count < 2 || !el) return;
+    const el = shellRef.current;
+    if (reduced || !el) return;
 
-    gsap.set(el, { xPercent: 50, yPercent: -50, rotate: 0, force3D: true });
-    el.style.setProperty("--dial-rotate", "0deg");
-
-    let disposed = false;
-
-    const advance = () => {
-      if (disposed) return;
-      const current = Number(gsap.getProperty(el, "rotate")) || 0;
-      spinRef.current?.kill();
-      spinRef.current = gsap.to(el, {
-        rotate: current + stepDeg,
-        duration: STEP_S,
-        ease: "power2.inOut",
-        overwrite: "auto",
-        onUpdate: () => syncDialRotate(el),
-        onComplete: () => {
-          if (disposed) return;
-          syncDialRotate(el);
-          setLensDeg(Number(gsap.getProperty(el, "rotate")) || 0);
-          advance();
-        },
-      });
+    let id = 0;
+    let inView = false;
+    const sync = () => {
+      window.clearInterval(id);
+      id = 0;
+      if (inView && !document.hidden) {
+        id = window.setInterval(() => setStep((s) => s + 1), STEP_MS);
+      }
     };
-
-    advance();
+    const io = new IntersectionObserver(([entry]) => {
+      inView = entry.isIntersecting;
+      sync();
+    });
+    io.observe(el);
+    document.addEventListener("visibilitychange", sync);
 
     return () => {
-      disposed = true;
-      spinRef.current?.kill();
-      gsap.killTweensOf(el);
+      window.clearInterval(id);
+      io.disconnect();
+      document.removeEventListener("visibilitychange", sync);
     };
-  }, [count, reduced, stepDeg]);
+  }, [reduced]);
 
-  if (count === 0) return null;
-
-  const dial = `calc(2 * ${RADIUS})`;
-  const peek = `calc(${RADIUS} * 1.08 + ${CARD_PX}px)`;
-  const shellHeight = `calc(${dial} + ${CARD_PX}px + 1.75rem)`;
+  const dialDeg = step * stepDeg;
 
   return (
     <div
-      data-ph-float
+      ref={shellRef}
       aria-label="Project highlights"
       className="pointer-events-none absolute right-0 top-1/2 z-100 hidden -translate-y-1/2 overflow-x-clip overflow-y-visible sm:block"
       style={
         {
           "--radius": RADIUS,
-          "--dial": dial,
-          width: peek,
-          height: shellHeight,
+          width: `calc(${RADIUS} * 1.08 + ${CARD_PX}px)`,
+          height: `calc(2 * ${RADIUS} + ${CARD_PX}px + 1.75rem)`,
         } as CSSProperties
       }
     >
       <div
-        ref={dialRef}
-        className="absolute right-0 top-1/2 size-var(--dial) origin-center will-change-transform"
-        style={{ "--dial-rotate": "0deg" } as CSSProperties}
+        className="absolute right-0 top-1/2 size-0 will-change-transform"
+        style={{
+          transform: `rotate(${dialDeg}deg)`,
+          transition: `transform ${MOVE_MS}ms ${EASE}`,
+        }}
       >
         {items.map((item, i) => {
-          const spoke = i * stepDeg;
-          const world = spoke + lensDeg;
+          const spoke = FOCUS_DEG + i * stepDeg;
           const { scale, opacity, isFocus } = lensStrength(
-            shortestDelta(world),
-            stepDeg,
+            shortestDelta(i * stepDeg + dialDeg),
           );
 
           return (
             <div
-              key={`${item.slug}-${i}`}
-              className="pointer-events-auto absolute left-1/2 top-1/2 size-37.5 will-change-transform"
+              key={item.slug}
+              className="pointer-events-auto absolute left-0 top-0 size-37.5"
               style={{
                 marginLeft: -CARD_PX / 2,
                 marginTop: -CARD_PX / 2,
-                transform: `rotate(${spoke}deg) translateX(var(--radius)) rotate(calc(${-spoke}deg - var(--dial-rotate, 0deg)))`,
+                transform: `rotate(${spoke}deg) translateX(var(--radius)) rotate(${-spoke}deg)`,
               }}
             >
               <SpotlightCard
                 item={item}
+                rotate={-dialDeg}
                 scale={scale}
                 opacity={opacity}
                 isFocus={isFocus}
