@@ -1,42 +1,17 @@
-"use client";
-
 import Link from "next/link";
-import { useEffect, useRef } from "react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { about, principles, processSteps, site } from "@/lib/content";
 import { Skills } from "@/components/skills/skills";
 
 export function About() {
-  const root = useRef<HTMLElement>(null);
-
-  useEffect(() => {
-    const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (reduced || !root.current) return;
-    gsap.registerPlugin(ScrollTrigger);
-    const ctx = gsap.context(() => {
-      gsap.from("[data-about-hero]", {
-        y: 32,
-        opacity: 0,
-        duration: 0.8,
-        ease: "power2.out",
-        stagger: 0.1,
-        scrollTrigger: { trigger: root.current, start: "top 88%", once: true },
-      });
-    }, root);
-    return () => ctx.revert();
-  }, []);
-
   return (
     <section
       id="about"
-      ref={root}
       aria-labelledby="about-title"
       className="border-t border-line bg-background"
     >
       <div className="mx-auto max-w-360 px-5 pb-20 pt-16 sm:px-10 sm:pb-28 sm:pt-20">
         <div
-          data-about-hero
+          data-reveal
           className="flex items-center justify-between gap-4"
         >
           <p className="text-sm font-medium text-accent">02 / About</p>
@@ -52,13 +27,14 @@ export function About() {
         <div className="mt-12 grid gap-12 lg:grid-cols-2 lg:gap-20 lg:pt-4">
           <h2
             id="about-title"
-            data-about-hero
             className="font-display text-[clamp(2.25rem,5vw,3.75rem)] font-semibold leading-[1.08] tracking-tight text-balance lg:max-w-md"
           >
-            Building products,{" "}
-            <span className="text-muted">not just pages.</span>
+            <span data-reveal-mask className="block">
+              Building products,{" "}
+              <span className="text-muted">not just pages.</span>
+            </span>
           </h2>
-          <div data-about-hero className="lg:pt-2">
+          <div data-reveal className="lg:pt-2">
             {about.map((p, i) => (
               <p
                 key={i}
@@ -77,7 +53,7 @@ export function About() {
         </div>
 
         <div className="mt-20 lg:grid lg:grid-cols-12 lg:gap-16">
-          <div className="lg:col-span-4">
+          <div data-reveal className="lg:col-span-4">
             <h3 className="font-display text-xl font-semibold tracking-tight sm:text-2xl">
               How I work
             </h3>
@@ -90,6 +66,7 @@ export function About() {
             {processSteps.map((step, i) => (
               <li
                 key={step.title}
+                data-reveal
                 className="grid gap-3 pb-10 lg:grid-cols-[7rem_1fr] lg:items-baseline lg:gap-8 lg:py-8 lg:pb-8"
               >
                 <span className="font-mono text-xs tabular-nums text-muted">
@@ -104,13 +81,17 @@ export function About() {
         </div>
 
         <div className="mt-20 border-t border-line pt-16 lg:grid lg:grid-cols-12 lg:gap-16">
-          <h3 className="font-display text-xl font-semibold tracking-tight sm:text-2xl lg:col-span-4">
+          <h3
+            data-reveal
+            className="font-display text-xl font-semibold tracking-tight sm:text-2xl lg:col-span-4"
+          >
             What I optimize for
           </h3>
           <dl className="mt-8 space-y-0 lg:col-span-8 lg:mt-0">
             {principles.map((p) => (
               <div
                 key={p.title}
+                data-reveal
                 className="grid gap-2 border-t border-line py-6 first:border-t-0 first:pt-0 sm:grid-cols-[minmax(0,11rem)_1fr] sm:gap-10 sm:py-7"
               >
                 <dt className="text-sm font-medium leading-snug">{p.title}</dt>
@@ -121,7 +102,7 @@ export function About() {
         </div>
 
         <div className="mt-16 grid gap-10 border-t border-line pt-16 sm:grid-cols-2 sm:gap-16">
-          <div>
+          <div data-reveal>
             <p className="text-xs uppercase tracking-widest text-muted">
               Education
             </p>
@@ -133,7 +114,7 @@ export function About() {
               {site.education.period}
             </p>
           </div>
-          <div>
+          <div data-reveal>
             <p className="text-xs uppercase tracking-widest text-muted">
               Certifications
             </p>
@@ -155,7 +136,7 @@ export function About() {
         </div>
 
         <div className="mt-20 border-t border-line pt-16">
-          <div className="max-w-2xl">
+          <div data-reveal className="max-w-2xl">
             <h3 className="font-display text-xl font-semibold tracking-tight sm:text-2xl">
               Stack
             </h3>
@@ -164,7 +145,7 @@ export function About() {
               to work in the archive where it applies.
             </p>
           </div>
-          <div className="mt-8">
+          <div data-reveal className="mt-8">
             <Skills />
           </div>
         </div>
