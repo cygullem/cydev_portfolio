@@ -118,14 +118,6 @@ export function PortfolioHero() {
         ease: "power4.out",
         delay: 0.35,
       });
-      gsap.to("[data-ph-float]", {
-        y: -8,
-        duration: 2.6,
-        ease: "sine.inOut",
-        yoyo: true,
-        repeat: -1,
-        stagger: 0.3,
-      });
     }, root);
 
     return () => ctx.revert();
