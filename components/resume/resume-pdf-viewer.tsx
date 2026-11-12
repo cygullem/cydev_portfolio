@@ -82,7 +82,7 @@ export function ResumePdfViewer({ src }: Props) {
   }, [src]);
 
   return (
-    <div className="relative min-h-[min(80svh,56rem)] overflow-y-auto  sm:p-6">
+    <div data-lenis-prevent className="relative min-h-[min(80svh,56rem)] overflow-y-auto  sm:p-6">
       {loading ? (
         <p className="py-16 text-center font-mono text-sm text-white/75">Loading PDF…</p>
       ) : null}
