@@ -5,7 +5,7 @@ import { ArrowUpRight } from "@/components/icons";
 
 function InfoCard({ label, children }: { label: string; children: ReactNode }) {
   return (
-    <div className="flex min-h-38 flex-col justify-between bg-[#e8e8e8] p-6 sm:min-h-42 sm:p-8">
+    <div data-reveal className="flex min-h-38 flex-col justify-between bg-[#e8e8e8] p-6 sm:min-h-42 sm:p-8">
       <p className="text-sm text-muted">{label}</p>
       <div className="font-display text-lg font-semibold uppercase leading-snug tracking-tight text-foreground sm:text-xl">
         {children}
@@ -19,7 +19,7 @@ function ReferenceCard() {
   const tel = `tel:+63${ref.phone.replace(/\D/g, "").replace(/^0/, "")}`;
 
   return (
-    <div className="flex min-h-38 flex-col justify-between bg-[#e8e8e8] p-6 sm:col-span-2 sm:min-h-42 sm:p-8">
+    <div data-reveal className="flex min-h-38 flex-col justify-between bg-[#e8e8e8] p-6 sm:col-span-2 sm:min-h-42 sm:p-8">
       <p className="text-sm text-muted">
         Reference · {ref.company}
       </p>
@@ -56,7 +56,7 @@ export function Contact() {
   return (
     <section id="contact" aria-labelledby="contact-title" className="bg-[#f3f3f3] px-5 py-14 sm:px-10 sm:py-20 lg:py-24">
       <div className="mx-auto max-w-360">
-        <div className="flex items-start justify-between gap-6">
+        <div data-reveal className="flex items-start justify-between gap-6">
           <Link href="/" className="font-display text-sm font-semibold tracking-tight sm:text-base">
             {site.brand}
           </Link>
@@ -66,11 +66,13 @@ export function Contact() {
         </div>
 
         <h2 id="contact-title" className="font-hero mt-10 text-[clamp(3.25rem,13vw,9.5rem)] leading-[0.92] tracking-tight text-foreground">
-          CONTACT ME
+          <span data-reveal-mask className="block">
+            CONTACT ME
+          </span>
         </h2>
 
         <div className="mt-14 grid gap-12 lg:mt-20 lg:grid-cols-2 lg:gap-16 xl:gap-24">
-          <div>
+          <div data-reveal>
             <p className="inline-flex items-center gap-2 bg-[#e8e8e8] px-3 py-2 font-mono text-[10px] font-medium uppercase tracking-[0.2em] text-foreground sm:text-xs">
               <span aria-hidden className="text-hero-orange">
                 ✱

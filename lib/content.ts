@@ -112,6 +112,10 @@ export const skills: { group: string; items: SkillItem[] }[] = [
     items: [
       { name: "Node.js" },
       { name: "REST APIs" },
+      { name: "Hono" },
+      { name: "Drizzle" },
+      { name: "Zod" },
+      { name: "TanStack Query" },
       { name: "Firebase", projectSlugs: ["hr-zen"] },
       { name: "Supabase", projectSlugs: ["salesnap", "merchantbee"] },
     ],
@@ -181,7 +185,7 @@ export const heroSpotlightClockProjectAssets = [
   },
   {
     slug: "merchantbee",
-    label: "/inventory-management",
+    label: "/inventory",
     cover: projectAsset("/projects/merchantbee/MERCHANTBEE-COVER.png"),
   },
   {
@@ -191,12 +195,12 @@ export const heroSpotlightClockProjectAssets = [
   },
   {
     slug: "onda-fit",
-    label: "/booking-system",
+    label: "/booking",
     cover: projectAsset("/projects/ondafit/ONDAFIT-COVER.png"),
   },
   {
     slug: "spendowl",
-    label: "/saas",
+    label: "/accounting",
     cover: projectAsset("/projects/spendowl/SPENDOWL-COVER.png"),
   },
 ] as const;

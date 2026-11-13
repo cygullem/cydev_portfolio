@@ -1,10 +1,5 @@
-"use client";
-
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useRef } from "react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import type { Work } from "@/lib/works";
 import { featuredWorks, works } from "@/lib/works";
 import { ArrowUpRight } from "@/components/icons";
@@ -23,13 +18,16 @@ function WorkPreview({ work }: { work: Work }) {
   if (work.cover) {
     return (
       <div className="relative aspect-4/3 w-full overflow-hidden bg-[#e8e8e8]">
-        <Image
-          src={work.cover}
-          alt=""
-          fill
-          sizes="(max-width: 640px) 100vw, 50vw"
-          className="object-cover object-center transition-transform duration-500 group-hover:scale-[1.02]"
-        />
+        {/* Taller than the frame so the scroll parallax never exposes an edge. */}
+        <div data-parallax="6" className="absolute inset-x-0 inset-y-[-8%]">
+          <Image
+            src={work.cover}
+            alt=""
+            fill
+            sizes="(max-width: 640px) 100vw, 50vw"
+            className="object-cover object-center transition-transform duration-500 group-hover:scale-[1.02]"
+          />
+        </div>
       </div>
     );
   }
@@ -81,29 +79,9 @@ function PlaceholderPreview({ hue }: { hue: number }) {
 const showcase = featuredWorks.slice(0, 4);
 
 export function FeaturedWorks() {
-  const root = useRef<HTMLElement>(null);
-
-  useEffect(() => {
-    const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (reduced || !root.current) return;
-    gsap.registerPlugin(ScrollTrigger);
-    const ctx = gsap.context(() => {
-      gsap.from("[data-work-card]", {
-        y: 56,
-        opacity: 0,
-        duration: 0.85,
-        ease: "power3.out",
-        stagger: 0.12,
-        scrollTrigger: { trigger: "[data-work-grid]", start: "top 88%" },
-      });
-    }, root);
-    return () => ctx.revert();
-  }, []);
-
   return (
     <section
       id="work"
-      ref={root}
       aria-labelledby="featured-work-title"
       className="overflow-hidden border-t border-line bg-[#f6f7f8] py-20 sm:py-28"
     >
@@ -112,16 +90,18 @@ export function FeaturedWorks() {
           id="featured-work-title"
           className="relative z-10 flex w-full items-baseline justify-between gap-[min(4vw,2rem)] whitespace-nowrap leading-[0.88] tracking-tighter"
         >
-          <span className="font-featured-serif text-[clamp(3.5rem,16cqw,12rem)] italic text-[#b8bcc4]">
+          <span
+            data-drift="-12"
+            className="font-featured-serif text-[clamp(3.5rem,16cqw,12rem)] italic text-[#b8bcc4]"
+          >
             Featured
           </span>
-          <span className="font-display text-[clamp(3.25rem,15.5cqw,11.5rem)] font-medium lowercase text-[#5c6570]">
+          <span data-drift="12" className="font-display text-[clamp(3.25rem,15.5cqw,11.5rem)] font-medium lowercase text-[#5c6570]">
             works
           </span>
         </h2>
 
         <div
-          data-work-grid
           className="relative z-20 -mt-4 grid gap-5 sm:-mt-8 sm:grid-cols-2 sm:gap-6 lg:gap-8"
         >
           {showcase.map((work) => {
@@ -129,7 +109,7 @@ export function FeaturedWorks() {
             return (
               <article
                 key={work.slug}
-                data-work-card
+                data-reveal
                 className="overflow-hidden rounded-2xl bg-white shadow-[0_20px_50px_-28px_rgba(15,23,42,0.18)] transition-shadow hover:shadow-[0_28px_60px_-24px_rgba(15,23,42,0.22)]"
               >
                 <Link
@@ -156,7 +136,7 @@ export function FeaturedWorks() {
           })}
         </div>
 
-        <div className="relative z-30 mt-12 flex justify-center sm:mt-14">
+        <div data-reveal className="relative z-30 mt-12 flex justify-center sm:mt-14">
           <Link
             href="/works"
             className="group inline-flex cursor-pointer items-center gap-2 rounded-full border border-[#94a3b8] bg-white px-6 py-3 font-mono text-xs uppercase tracking-[0.2em] text-[#334155] shadow-[0_8px_24px_-12px_rgba(15,23,42,0.2)] transition-colors hover:border-[#64748b] hover:bg-[#f8fafc] hover:text-[#0f172a]"

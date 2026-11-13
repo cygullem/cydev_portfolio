@@ -6,6 +6,7 @@ import { FeaturedWorks } from "@/components/home/featured-works";
 import { Experience } from "@/components/experience/experience";
 import { Contact } from "@/components/contact/contact";
 import { Footer } from "@/components/footer/footer";
+import { ScrollEffects } from "@/components/motion/scroll-effects";
 
 const jsonLd = {
   "@context": "https://schema.org",
@@ -66,8 +67,10 @@ export default function Home() {
           __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c"),
         }}
       />
+      <ScrollEffects />
       <PortfolioHero />
-      <div className="bg-background">
+      {/* Positioned above the hero so it slides over the hero's parallax. */}
+      <div className="relative z-10 bg-background">
         <About />
         <FeaturedWorks />
         <Experience />

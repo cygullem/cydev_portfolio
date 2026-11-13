@@ -28,15 +28,17 @@ export function Experience() {
       <div className="mx-auto max-w-360 px-5 sm:px-10">
         <header className="grid gap-8 lg:grid-cols-[1fr_auto] lg:items-end">
           <div>
-            <p className="font-mono text-xs uppercase tracking-[0.25em] text-accent">03 / Experience</p>
+            <p data-reveal className="font-mono text-xs uppercase tracking-[0.25em] text-accent">03 / Experience</p>
             <h2
               id="experience-title"
               className="font-display mt-4 text-4xl font-semibold tracking-tight text-balance sm:text-5xl"
             >
-              Where I&apos;ve shipped.
+              <span data-reveal-mask className="block">
+                Where I&apos;ve shipped.
+              </span>
             </h2>
           </div>
-          <dl className="grid grid-cols-2 gap-x-10 gap-y-1 font-mono text-xs text-muted sm:flex sm:gap-10">
+          <dl data-reveal className="grid grid-cols-2 gap-x-10 gap-y-1 font-mono text-xs text-muted sm:flex sm:gap-10">
             <div>
               <dt className="uppercase tracking-widest">Roles</dt>
               <dd className="mt-1 text-sm text-foreground">{String(experience.length).padStart(2, "0")}</dd>
@@ -54,6 +56,7 @@ export function Experience() {
             return (
               <li
                 key={`${e.company}-${e.period}`}
+                data-reveal
                 className="group grid gap-6 border-t border-line py-10 transition-colors hover:bg-surface/60 sm:py-12 lg:grid-cols-12 lg:gap-10 lg:px-4"
               >
                 <div className="flex items-baseline justify-between gap-4 lg:col-span-3 lg:flex-col lg:justify-start lg:gap-2">

@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { site, skills } from "@/lib/content";
 import { works } from "@/lib/works";
+import { SkillIcon } from "@/components/skills/skill-icons";
 
 function projectsUsing(name: string) {
   return works.filter((p) => p.frontend.includes(name) || p.backend.includes(name));
@@ -66,9 +67,15 @@ export function Skills() {
                     key={name}
                     className="flex items-start justify-between gap-4 border-t border-line py-3.5 first:border-t-0 first:pt-0"
                   >
-                    <div className="min-w-0">
+                    <div className="flex min-w-0 items-start gap-2.5">
+                      <SkillIcon
+                        name={name}
+                        className="mt-0.5 size-4 shrink-0"
+                      />
+                      <div className="min-w-0">
                       <p className="text-sm font-medium leading-snug text-foreground">{name}</p>
                       {note && <p className="mt-0.5 text-xs text-muted">{note}</p>}
+                      </div>
                     </div>
                     {projectSlugs?.length ? (
                       <ProjectLinks slugs={projectSlugs} />

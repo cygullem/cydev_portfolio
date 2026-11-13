@@ -129,7 +129,10 @@ export function PortfolioHero() {
       aria-label="Introduction"
       className="relative isolate z-0 overflow-x-clip overflow-y-visible bg-hero-orange text-white"
     >
-      <div className="relative mx-auto min-h-svh max-w-[100rem] border-x border-white/20">
+      <div
+        data-parallax-out="22"
+        className="relative mx-auto min-h-svh max-w-[100rem] border-x border-white/20"
+      >
         <div className="absolute inset-x-0 top-0 h-px bg-white/20" />
         <div className="absolute inset-x-0 bottom-0 h-px bg-white/20" />
         <GridMarks />
