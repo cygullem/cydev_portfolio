@@ -10,6 +10,7 @@ import {
 } from "@/lib/content";
 import { works } from "@/lib/works";
 import { ArrowUpRight } from "@/components/icons";
+import { StatValue } from "@/components/about/stat-value";
 import { Skills } from "@/components/skills/skills";
 
 const stats = [
@@ -103,9 +104,10 @@ export function About() {
                     : "border border-line bg-surface"
                 }`}
               >
-                <dd className="font-hero text-[clamp(3rem,7vw,5.5rem)] leading-none tracking-tight">
-                  {s.value}
-                </dd>
+                <StatValue
+                  value={s.value}
+                  className="font-hero text-[clamp(3rem,7vw,5.5rem)] leading-none tracking-tight tabular-nums"
+                />
                 <dt
                   className={`text-xs leading-snug sm:text-sm ${i === 0 ? "text-white/85" : "text-muted"}`}
                 >
