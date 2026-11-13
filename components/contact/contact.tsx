@@ -73,12 +73,6 @@ export function Contact() {
 
         <div className="mt-14 grid gap-12 lg:mt-20 lg:grid-cols-2 lg:gap-16 xl:gap-24">
           <div data-reveal>
-            <p className="inline-flex items-center gap-2 bg-[#e8e8e8] px-3 py-2 font-mono text-[10px] font-medium uppercase tracking-[0.2em] text-foreground sm:text-xs">
-              <span aria-hidden className="text-hero-orange">
-                ✱
-              </span>
-              Ready to start?
-            </p>
             <h3 className="font-display mt-10 text-4xl font-semibold uppercase tracking-tight sm:text-5xl lg:text-6xl">
               Get in touch
             </h3>

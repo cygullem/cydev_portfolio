@@ -20,10 +20,10 @@
   --color-accent: var(--accent);
   --color-hero-orange: var(--hero-orange);
   --color-hero-orange-deep: var(--hero-orange-deep);
-  --font-sans: var(--font-space);
-  --font-mono: var(--font-geist-mono);
-  --font-display: var(--font-archivo);
-  --font-hero: var(--font-bebas);
+  --font-sans: var(--font-bricolage);
+  --font-mono: var(--font-bricolage);
+  --font-display: var(--font-bricolage);
+  --font-hero: var(--font-bricolage);
 }
 
 html {
@@ -76,7 +76,7 @@ body::-webkit-scrollbar {
 }
 
 .font-featured-serif {
-  font-family: var(--font-featured-serif), Georgia, "Times New Roman", serif;
+  font-family: var(--font-bricolage), system-ui, sans-serif;
 }
 
 @media (prefers-reduced-motion: no-preference) {

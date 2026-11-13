@@ -1,44 +1,20 @@
 import type { Viewport } from "next";
 import Script from "next/script";
-import {
-  Archivo,
-  Geist_Mono,
-  Instrument_Serif,
-  Oswald,
-  Space_Grotesk,
-} from "next/font/google";
+import localFont from "next/font/local";
 import { SiteChrome } from "@/components/layout/site-chrome";
 import { rootMetadata } from "@/lib/seo";
 import "./globals.css";
 import Link from "next/link";
 
-const space = Space_Grotesk({
-  variable: "--font-space",
-  subsets: ["latin"],
-});
-
-const archivo = Archivo({
-  variable: "--font-archivo",
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700", "800"],
-});
-
-const bebas = Oswald({
-  weight: ["400", "500", "600", "700"],
-  variable: "--font-bebas",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
-
-const featuredSerif = Instrument_Serif({
-  weight: "400",
-  style: ["normal", "italic"],
-  variable: "--font-featured-serif",
-  subsets: ["latin"],
+const bricolage = localFont({
+  src: [
+    { path: "../public/fonts/BricolageGrotesque-Regular.ttf", weight: "400" },
+    { path: "../public/fonts/BricolageGrotesque-Medium.ttf", weight: "500" },
+    { path: "../public/fonts/BricolageGrotesque-SemiBold.ttf", weight: "600" },
+    { path: "../public/fonts/BricolageGrotesque-Bold.ttf", weight: "700" },
+  ],
+  variable: "--font-bricolage",
+  display: "swap",
 });
 
 export const metadata = rootMetadata();
@@ -55,7 +31,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       lang="en"
       suppressHydrationWarning
       data-scroll-behavior="smooth"
-      className={`${space.variable} ${archivo.variable} ${bebas.variable} ${geistMono.variable} ${featuredSerif.variable} h-full antialiased`}
+      className={`${bricolage.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col font-sans">
         <Script id="theme-light-only" strategy="beforeInteractive">

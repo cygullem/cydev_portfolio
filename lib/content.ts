@@ -137,6 +137,7 @@ export const experience = [
       "Collaborate with design to deliver 5+ seamless, production user experiences",
     ],
     stack: ["Next.js", "TypeScript", "Tailwind CSS", "shadcn/ui"],
+    projectSlugs: ["salesnap"],
   },
   {
     period: "Aug 2025 — Dec 2025",
@@ -148,6 +149,7 @@ export const experience = [
       "Built authentication flows and integrated real-time features with Firebase",
     ],
     stack: ["Next.js", "React", "Firebase", "TypeScript"],
+    projectSlugs: ["spendowl", "hr-zen", "qrwise"],
   },
   {
     period: "Feb 2025 — May 2025",
@@ -159,6 +161,7 @@ export const experience = [
       "Implemented QR scanning; supported Node.js services for check-in/out (~30% faster)",
     ],
     stack: ["React Native", "Node.js", "TypeScript"],
+    projectSlugs: [],
   },
 ];
 
