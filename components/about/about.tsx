@@ -1,13 +1,54 @@
+import Image from "next/image";
 import Link from "next/link";
-import { about, principles, processSteps, site } from "@/lib/content";
+import {
+  about,
+  experience,
+  highlights,
+  principles,
+  processSteps,
+  site,
+} from "@/lib/content";
+import { works } from "@/lib/works";
+import { ArrowUpRight } from "@/components/icons";
 import { Skills } from "@/components/skills/skills";
+
+const stats = [
+  ...highlights.slice(0, 2),
+  { value: String(works.length), label: "Projects in the archive" },
+  { value: String(experience.length), label: "Roles on product teams" },
+];
+
+const shots = works.flatMap((w) =>
+  w.gallery?.[0] ? [{ name: w.name, src: w.gallery[0] }] : [],
+);
+
+function ShotRow({ decorative = false }: { decorative?: boolean }) {
+  return (
+    <ul aria-hidden={decorative || undefined} className="flex shrink-0 gap-4 pr-4">
+      {shots.map((shot) => (
+        <li
+          key={shot.name}
+          className="relative h-40 w-64 overflow-hidden rounded-xl border border-line bg-surface sm:h-52 sm:w-80"
+        >
+          <Image
+            src={shot.src}
+            alt={decorative ? "" : `${shot.name} landing page`}
+            fill
+            sizes="320px"
+            className="object-cover object-top"
+          />
+        </li>
+      ))}
+    </ul>
+  );
+}
 
 export function About() {
   return (
     <section
       id="about"
       aria-labelledby="about-title"
-      className="border-t border-line bg-background"
+      className="overflow-hidden border-t border-line bg-background"
     >
       <div className="mx-auto max-w-360 px-5 pb-20 pt-16 sm:px-10 sm:pb-28 sm:pt-20">
         <div
@@ -24,89 +65,127 @@ export function About() {
           </span>
         </div>
 
-        <div className="mt-12 grid gap-12 lg:grid-cols-2 lg:gap-20 lg:pt-4">
-          <h2
-            id="about-title"
-            className="font-display text-[clamp(2.25rem,5vw,3.75rem)] font-semibold leading-[1.08] tracking-tight text-balance lg:max-w-md"
-          >
-            <span data-reveal-mask className="block">
-              Building products,{" "}
-              <span className="text-muted">not just pages.</span>
-            </span>
-          </h2>
-          <div data-reveal className="lg:pt-2">
-            {about.map((p, i) => (
-              <p
-                key={i}
-                className={`max-w-lg text-base leading-[1.7] sm:text-[1.0625rem] ${i === 0 ? "text-foreground" : "mt-4 text-muted"}`}
-              >
-                {p}
-              </p>
-            ))}
+        <div className="mt-12 grid gap-10 lg:grid-cols-12 lg:gap-12 lg:pt-4">
+          <div className="lg:col-span-6">
+            <h2
+              id="about-title"
+              className="font-display text-[clamp(2.25rem,5vw,3.75rem)] font-semibold leading-[1.08] tracking-tight text-balance"
+            >
+              <span data-reveal-mask className="block">
+                Building products,{" "}
+                <span className="text-muted">not just pages.</span>
+              </span>
+            </h2>
+            <p
+              data-reveal
+              className="mt-6 max-w-lg text-base leading-[1.7] sm:text-[1.0625rem]"
+            >
+              {about[0]}
+            </p>
             <Link
+              data-reveal
               href="/works"
-              className="mt-8 inline-block text-sm font-medium text-accent underline decoration-accent/35 underline-offset-[6px] transition-colors hover:decoration-accent"
+              className="mt-6 inline-flex items-center gap-1.5 text-sm font-medium text-accent underline decoration-accent/35 underline-offset-[6px] transition-colors hover:decoration-accent"
             >
               View selected work
+              <ArrowUpRight className="size-4" />
             </Link>
           </div>
-        </div>
 
-        <div className="mt-20 lg:grid lg:grid-cols-12 lg:gap-16">
-          <div data-reveal className="lg:col-span-4">
-            <h3 className="font-display text-xl font-semibold tracking-tight sm:text-2xl">
-              How I work
-            </h3>
-            <p className="mt-3 text-sm leading-relaxed text-muted">
-              A simple loop I use on client and product work — from discovery
-              through handoff.
-            </p>
-          </div>
-          <ol className="mt-10 space-y-10 lg:col-span-8 lg:mt-0 lg:space-y-0 lg:divide-y lg:divide-line lg:border-y lg:border-line">
-            {processSteps.map((step, i) => (
-              <li
-                key={step.title}
-                data-reveal
-                className="grid gap-3 pb-10 lg:grid-cols-[7rem_1fr] lg:items-baseline lg:gap-8 lg:py-8 lg:pb-8"
-              >
-                <span className="font-mono text-xs tabular-nums text-muted">
-                  {String(i + 1).padStart(2, "0")} — {step.title}
-                </span>
-                <p className="text-sm leading-relaxed text-muted sm:text-[0.9375rem]">
-                  {step.body}
-                </p>
-              </li>
-            ))}
-          </ol>
-        </div>
-
-        <div className="mt-20 border-t border-line pt-16 lg:grid lg:grid-cols-12 lg:gap-16">
-          <h3
-            data-reveal
-            className="font-display text-xl font-semibold tracking-tight sm:text-2xl lg:col-span-4"
-          >
-            What I optimize for
-          </h3>
-          <dl className="mt-8 space-y-0 lg:col-span-8 lg:mt-0">
-            {principles.map((p) => (
+          <dl className="grid grid-cols-2 gap-3 sm:gap-4 lg:col-span-6">
+            {stats.map((s, i) => (
               <div
-                key={p.title}
+                key={s.label}
                 data-reveal
-                className="grid gap-2 border-t border-line py-6 first:border-t-0 first:pt-0 sm:grid-cols-[minmax(0,11rem)_1fr] sm:gap-10 sm:py-7"
+                className={`flex min-h-36 flex-col justify-between rounded-2xl p-5 sm:min-h-44 sm:p-6 ${
+                  i === 0
+                    ? "bg-hero-orange text-white"
+                    : "border border-line bg-surface"
+                }`}
               >
-                <dt className="text-sm font-medium leading-snug">{p.title}</dt>
-                <dd className="text-sm leading-relaxed text-muted">{p.body}</dd>
+                <dd className="font-hero text-[clamp(3rem,7vw,5.5rem)] leading-none tracking-tight">
+                  {s.value}
+                </dd>
+                <dt
+                  className={`text-xs leading-snug sm:text-sm ${i === 0 ? "text-white/85" : "text-muted"}`}
+                >
+                  {s.label}
+                </dt>
               </div>
             ))}
           </dl>
         </div>
+      </div>
 
-        <div className="mt-16 grid gap-10 border-t border-line pt-16 sm:grid-cols-2 sm:gap-16">
-          <div data-reveal>
+      <div data-reveal className="flex overflow-hidden">
+        <div className="about-marquee-track flex w-max hover:[animation-play-state:paused]">
+          <ShotRow />
+          <ShotRow decorative />
+        </div>
+      </div>
+
+      <div className="mx-auto max-w-360 px-5 pb-20 pt-20 sm:px-10 sm:pb-28">
+        <h3
+          data-reveal
+          className="font-display text-xl font-semibold tracking-tight sm:text-2xl"
+        >
+          How I work
+        </h3>
+        <ol className="mt-8 grid gap-3 sm:gap-4 md:grid-cols-3">
+          {processSteps.map((step, i) => (
+            <li
+              key={step.title}
+              data-reveal
+              className="flex min-h-64 flex-col rounded-2xl bg-[#f3f3f3] p-6 text-[#f4efe6] sm:p-7"
+            >
+              <span className="font-mono text-xs tabular-nums text-[#000000]">
+                {String(i + 1).padStart(2, "0")}
+              </span>
+              <p className="mt-8 flex h-[2em] items-end font-hero text-[clamp(2.75rem,5vw,4rem)] uppercase leading-none tracking-tight text-hero-orange">
+                {step.title}
+              </p>
+              <p className="mt-4 text-sm leading-relaxed text-[#000000]">
+                {step.body}
+              </p>
+            </li>
+          ))}
+        </ol>
+        <ul
+          data-reveal
+          aria-label="What I optimize for"
+          className="mt-4 flex flex-wrap gap-2"
+        >
+          {principles.map((p) => (
+            <li
+              key={p.title}
+              className="rounded-full border border-line px-3.5 py-1.5 text-xs font-medium text-foreground sm:text-sm"
+            >
+              {p.title}
+            </li>
+          ))}
+        </ul>
+
+        <div className="mt-20 border-t border-line pt-16">
+          <h3
+            data-reveal
+            className="font-display text-xl font-semibold tracking-tight sm:text-2xl"
+          >
+            Stack
+          </h3>
+          <div data-reveal className="mt-8">
+            <Skills />
+          </div>
+        </div>
+
+        <div className="mt-16 grid gap-3 sm:gap-4 md:grid-cols-2">
+          <div
+            data-reveal
+            className="rounded-2xl border border-line bg-surface p-6 sm:p-7"
+          >
             <p className="text-xs uppercase tracking-widest text-muted">
               Education
             </p>
-            <p className="mt-3 font-display text-lg font-semibold">
+            <p className="mt-6 font-display text-xl font-semibold sm:text-2xl">
               {site.education.degree}
             </p>
             <p className="mt-1 text-sm text-muted">{site.education.school}</p>
@@ -114,39 +193,28 @@ export function About() {
               {site.education.period}
             </p>
           </div>
-          <div data-reveal>
+          <div
+            data-reveal
+            className="rounded-2xl border border-line bg-surface p-6 sm:p-7"
+          >
             <p className="text-xs uppercase tracking-widest text-muted">
               Certifications
             </p>
-            <ul className="mt-3 space-y-2.5 text-sm">
+            <ul className="mt-6 flex flex-wrap gap-2">
               {site.certifications.map((c) => (
                 <li key={c.href}>
                   <Link
                     href={c.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-muted underline decoration-line underline-offset-[5px] transition-colors hover:text-accent hover:decoration-accent/40"
+                    className="inline-flex items-center gap-1.5 rounded-full border border-line px-3.5 py-2 text-sm transition-colors hover:border-accent hover:text-accent"
                   >
                     {c.name}
+                    <ArrowUpRight className="size-3.5" />
                   </Link>
                 </li>
               ))}
             </ul>
-          </div>
-        </div>
-
-        <div className="mt-20 border-t border-line pt-16">
-          <div data-reveal className="max-w-2xl">
-            <h3 className="font-display text-xl font-semibold tracking-tight sm:text-2xl">
-              Stack
-            </h3>
-            <p className="mt-2 text-sm leading-relaxed text-muted">
-              What I reach for to ship UI, APIs, and production deploys — linked
-              to work in the archive where it applies.
-            </p>
-          </div>
-          <div data-reveal className="mt-8">
-            <Skills />
           </div>
         </div>
       </div>
