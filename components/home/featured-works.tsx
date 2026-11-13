@@ -14,17 +14,19 @@ function workTags(work: Work): [string, string] {
   return [primary, secondary.charAt(0).toUpperCase() + secondary.slice(1)];
 }
 
-function WorkPreview({ work }: { work: Work }) {
+function WorkPreview({ work, wide }: { work: Work; wide: boolean }) {
   if (work.cover) {
     return (
-      <div className="relative aspect-4/3 w-full overflow-hidden bg-[#e8e8e8]">
+      <div
+        className={`relative aspect-4/3 w-full overflow-hidden bg-[#e8e8e8] ${wide ? "sm:aspect-21/9" : ""}`}
+      >
         {/* Taller than the frame so the scroll parallax never exposes an edge. */}
         <div data-parallax="6" className="absolute inset-x-0 inset-y-[-8%]">
           <Image
             src={work.cover}
             alt=""
             fill
-            sizes="(max-width: 640px) 100vw, 50vw"
+            sizes={wide ? "(max-width: 1440px) 100vw, 1440px" : "(max-width: 640px) 100vw, 50vw"}
             className="object-cover object-center transition-transform duration-500 group-hover:scale-[1.02]"
           />
         </div>
@@ -104,19 +106,20 @@ export function FeaturedWorks() {
         <div
           className="relative z-20 -mt-4 grid gap-5 sm:-mt-8 sm:grid-cols-2 sm:gap-6 lg:gap-8"
         >
-          {showcase.map((work) => {
+          {showcase.map((work, i) => {
             const [tagA, tagB] = workTags(work);
+            const wide = i % 3 === 0;
             return (
               <article
                 key={work.slug}
                 data-reveal
-                className="overflow-hidden rounded-2xl bg-white shadow-[0_20px_50px_-28px_rgba(15,23,42,0.18)] transition-shadow hover:shadow-[0_28px_60px_-24px_rgba(15,23,42,0.22)]"
+                className={`${wide ? "sm:col-span-2 " : ""}overflow-hidden rounded-2xl bg-white shadow-[0_20px_50px_-28px_rgba(15,23,42,0.18)] transition-shadow hover:shadow-[0_28px_60px_-24px_rgba(15,23,42,0.22)]`}
               >
                 <Link
                   href={`/works/${work.slug}`}
                   className="group block cursor-pointer"
                 >
-                  <WorkPreview work={work} />
+                  <WorkPreview work={work} wide={wide} />
                   <div className="flex flex-col gap-4 px-5 py-5 sm:flex-row sm:items-center sm:justify-between sm:px-7 sm:py-6">
                     <h3 className="font-display text-xl font-semibold tracking-tight text-[#1e293b] transition-colors group-hover:text-[#0f172a] sm:text-2xl">
                       {work.name}
