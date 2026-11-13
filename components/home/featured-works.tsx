@@ -94,7 +94,7 @@ export function FeaturedWorks() {
         >
           <span
             data-drift="-12"
-            className="font-featured-serif text-[clamp(3.5rem,16cqw,12rem)] italic text-[#b8bcc4]"
+            className="font-featured-serif text-[clamp(3.5rem,16cqw,12rem)] text-[#b8bcc4]"
           >
             Featured
           </span>
